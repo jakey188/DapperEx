@@ -17,7 +17,7 @@ namespace Dapper.Demo
     {
         static void Main(string[] args)
         {
-            //var list = new List<Products>();
+            //var list = new List<Products>(); 
 
 
             using (var db = new DapperDbContext("Data Source=192.168.1.189;Initial Catalog=Northwind;Persist Security Info=True;User ID=sa;Password=sa"))
