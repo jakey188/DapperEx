@@ -24,5 +24,6 @@ namespace Dapper.Linq
         TResult Max<TResult>(Expression<Func<T,TResult>> selector);
         TResult Min<TResult>(Expression<Func<T,TResult>> selector);
         TResult Sum<TResult>(Expression<Func<T,TResult>> selector);
+        string ToString();
     }
 }

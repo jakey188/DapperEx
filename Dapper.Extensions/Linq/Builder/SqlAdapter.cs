@@ -17,7 +17,6 @@ namespace Dapper.Linq
 
             var order = orderList.Count> 0 ? " ORDER BY " + string.Join(",",orderList) : "";
             var selection = string.Join(",", selectList);
-            
             var sql = $"SELECT {(top == 0 ? "" : "TOP (" + top+")")} {selection} FROM {source} {conditions} {order} {grouping} {having}";
 
             Trace.WriteLine($"SQL打印:{sql}");

@@ -7,71 +7,32 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper.Demo.Entites;
 using Dapper.Linq.Helpers;
 
 namespace Dapper.Demo
 {
-    public class TableInfo
-    {
-        /// <summary>
-        /// 表名
-        /// </summary>
-        internal string Name { get; set; }
-        /// <summary>
-        /// 列名
-        /// </summary>
-        internal Dictionary<string,string> Columns { get; set; }
-        /// <summary>
-        /// 别名
-        /// </summary>
-        internal string Alias { get; set; }
-    }
     public class TimeTest
     {
-        private static readonly ConcurrentDictionary<Type,TableInfo> TypeTableInfo = new ConcurrentDictionary<Type,TableInfo>();
-        public TableInfo GetTableInfo(Type type)
+        public static void Init(DapperDbContext db)
         {
-            for (var i = 0;i < 10;i++)
-            {
-               
-                var sw = new Stopwatch();
-                sw.Reset();
-                sw.Start();
-                var tableInfo = new TableInfo();
-                if (!TypeTableInfo.TryGetValue(type,out tableInfo))
-                {
+            LinqToStringTest(db);
+        }
 
-                    var properties = new Dictionary<string,string>();
-                    type.GetProperties().ToList().ForEach(
-                            x =>
-                            {
-                                var col = (ColumnAttribute)x.GetCustomAttribute(typeof(ColumnAttribute));
-                                properties.Add(x.Name,(col != null) ? col.Name : x.Name);
-                            }
-                        );
 
-                    var attrib = (TableAttribute)type.GetCustomAttribute(typeof(TableAttribute));
+        private static void LinqToStringTest(DapperDbContext db)
+        {
+            Stopwatch stopwatch = new Stopwatch();
+            
+            stopwatch.Start();
 
-                    tableInfo = new TableInfo
-                    {
-                        Name = (attrib != null ? attrib.Name : type.Name),
-                        Columns = properties,
-                        Alias = string.Format("t{0}",1)
-                    };
-                    if (i > 0)
-                    {
-                        //TypeTableInfo.TryAdd(type,tableInfo);
-                    }
-                    
-                }
-                sw.Stop();
-                if (i > 0)
-                {
-                    Console.WriteLine("耗时" + sw.ElapsedMilliseconds + "毫秒");
-                }
-            }
+            var sql = db.Query<Products>(x => x.ProductId > 0 && x.ReorderLevel == 1).OrderByDescending(x => x.ProductId)
+                .Select(x => new {id = x.ProductId}).ToString();
 
-            return null;
+            stopwatch.Stop();
+
+            var time = stopwatch.ElapsedMilliseconds;
+            Console.WriteLine("耗时：" + time + "毫秒："+ sql);
         }
     }
 }

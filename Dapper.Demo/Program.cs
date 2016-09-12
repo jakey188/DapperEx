@@ -22,7 +22,12 @@ namespace Dapper.Demo
 
             using (var db = new DapperDbContext("Data Source=192.168.1.189;Initial Catalog=Northwind;Persist Security Info=True;User ID=sa;Password=sa"))
             {
-                LinqTestcs.Create(db);
+                //LinqTestcs.Create(db);
+                for (var i = 0; i < 100; i++)
+                {
+                    TimeTest.Init(db);
+                    LinqTestcs.Create(db);
+                }
             }
             Console.ReadKey();
         }

@@ -1,7 +1,24 @@
-﻿using System.Linq.Expressions;
+﻿using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Dapper.Linq
 {
+    internal class TableInfo
+    {
+        /// <summary>
+        /// 表名
+        /// </summary>
+        internal string Name { get; set; }
+        /// <summary>
+        /// 列名
+        /// </summary>
+        internal Dictionary<string,string> Columns { get; set; }
+        /// <summary>
+        /// 别名
+        /// </summary>
+        internal string Alias { get; set; }
+    }
+
     public class MethodCall
     {
         internal const string EndsWith = "EndsWith";

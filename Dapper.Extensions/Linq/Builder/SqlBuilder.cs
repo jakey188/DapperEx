@@ -16,6 +16,7 @@ namespace Dapper.Linq
         /// SQL表名
         /// </summary>
         public string Table { get; set; }
+        public string TableAliasName { get; set; }
         /// <summary>
         /// SQL条件
         /// </summary>
@@ -50,6 +51,7 @@ namespace Dapper.Linq
             Adapter = new SqlAdapter();
             Parameters = new DynamicParameters();
             SelectField = new List<string> {"*"};
+            TableAliasName = table.Alias;
             Table = Adapter.Table(table.Name,table.Alias);
         }
 
