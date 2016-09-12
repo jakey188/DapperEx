@@ -12,10 +12,32 @@ namespace Dapper.Demo
 
         public static void Create(DapperDbContext db)
         {
+            Delete(db);
+            Update(db);
+            PagedTest(db);
             WhereTest(db);
             SelectTest(db);
             GroupByTest(db);
             TakeTest(db);
+        }
+
+        private static void Delete(DapperDbContext db)
+        {
+            db.Delete<Products>(x => x.ProductId > 70);
+        }
+
+        private static void Update(DapperDbContext db)
+        {
+            db.Update<Products>(x => x.ProductId > 70, x => new Products {ProductName = "测试分类1"});
+        }
+
+        private static void PagedTest(DapperDbContext db)
+        {
+            int total = 0;
+            var a = db.Query<Products>(x=>x.ProductId>0)
+                .OrderBy(x => x.ProductId)
+                .ThenByDescending(x => x.ReorderLevel)
+                .ToPageList(1, 10, out total);
         }
 
         private static void WhereTest(DapperDbContext db)

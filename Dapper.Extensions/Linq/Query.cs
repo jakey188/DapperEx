@@ -88,7 +88,8 @@ namespace Dapper.Linq
             total = 0;
             if (pageSize > 0)
             {
-                total = Count();
+                total = _connection.ExecuteScalar<int>($"SELECT COUNT(*) FROM {_builder.Table} {_builder.Where}",
+                    _builder.Parameters);
                 if (pageIndex < 1)
                     pageIndex = 1;
             }
@@ -106,7 +107,8 @@ namespace Dapper.Linq
         public int Count()
         {
             _builder.SelectField = new List<string>() { "Count(*)" };
-            return _connection.ExecuteScalar<int>(_builder.GetQueryString(),_builder.Parameters,_transaction);
+
+            return _connection.ExecuteScalar<int>(_builder.GetQueryString(), _builder.Parameters, _transaction);
         }
 
         /// <summary>
@@ -246,6 +248,11 @@ namespace Dapper.Linq
         {
             new OrderByClause<T>(_builder).Build(predicate.Body, true);
             return this;
+        }
+
+        public string ToString()
+        {
+            return _builder.GetQueryString();
         }
     }
 }

@@ -132,8 +132,8 @@ namespace Dapper
             if (expression == null) return 0;
             var builder = new SqlBuilder<T>();
             var resolve =new  WhereExpressionVisitor<T>();
-            resolve.Evaluate(expression, new SqlBuilder<T>());
-            string sql = $"DELETE FROM {builder.Table} {builder.Where}";
+            resolve.Evaluate(expression,builder);
+            string sql = $"DELETE [{builder.TableAliasName}] FROM {builder.Table} {builder.Where}";
             return Connection.Execute(sql, builder.Parameters, Transaction);
         }
 
@@ -151,7 +151,7 @@ namespace Dapper
                 return 0;
             var builder = new SqlBuilder<T>();
             var resolve = new WhereExpressionVisitor<T>();
-            resolve.Evaluate(whereExpression, new SqlBuilder<T>());
+            resolve.Evaluate(whereExpression,builder);
 
             string set = string.Empty;
             var expression = (MemberInitExpression) updateExpression.Body;
@@ -174,12 +174,12 @@ namespace Dapper
                     var lambda = Expression.Lambda(memberExpression, null);
                     value = lambda.Compile().DynamicInvoke();
                 }
-                set += $"{name}=@{name}";
-                if (i < bindingCount)
-                    set += ", ";
+                set += $"[{builder.TableAliasName}].[{name}]=@{name}";
+                if (i < bindingCount) set += ", ";
                 builder.Parameters.Add(name, value);
             }
-            string sql = $"UPDATE {builder.Table} SET {set} {builder.Where}";
+
+            string sql = $"UPDATE [{builder.TableAliasName}] SET {set}  FROM {builder.Table} {builder.Where}";
 
             return Connection.Execute(sql, builder.Parameters, Transaction);
         }

@@ -8,21 +8,7 @@ using System.Reflection;
 
 namespace Dapper.Linq.Helpers
 {
-    internal class TableInfo
-    {
-        /// <summary>
-        /// 表名
-        /// </summary>
-        internal string Name { get; set; }
-        /// <summary>
-        /// 列名
-        /// </summary>
-        internal Dictionary<string,string> Columns { get; set; }
-        /// <summary>
-        /// 别名
-        /// </summary>
-        internal string Alias { get; set; }
-    }
+    
 
     internal class CacheHelper
     {
@@ -36,7 +22,7 @@ namespace Dapper.Linq.Helpers
         public static TableInfo GetTableInfo(Expression expression)
         {
             var exp = Helper.GetMemberExpression(expression);
-            if (!(exp is MemberExpression))
+            if (exp == null)
                 return null;
 
             return GetTableInfo(exp.Expression.Type);
@@ -44,7 +30,7 @@ namespace Dapper.Linq.Helpers
 
         public static TableInfo GetTableInfo(Type type)
         {
-            var tableInfo = new TableInfo();
+            TableInfo tableInfo;
             if (!TypeTableInfo.TryGetValue(type,out tableInfo))
             {
                 var properties = new Dictionary<string,string>();
