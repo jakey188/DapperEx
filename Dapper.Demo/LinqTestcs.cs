@@ -12,13 +12,24 @@ namespace Dapper.Demo
 
         public static void Create(DapperDbContext db)
         {
-            Delete(db);
-            Update(db);
-            PagedTest(db);
-            WhereTest(db);
-            SelectTest(db);
-            GroupByTest(db);
-            TakeTest(db);
+            Join(db);
+            //Delete(db);
+            //Update(db);
+            //PagedTest(db);
+            //WhereTest(db);
+            //SelectTest(db);
+            //GroupByTest(db);
+            //TakeTest(db);
+        }
+
+        private static void Join(DapperDbContext db)
+        {
+            var query = db.Query<Products>().Where(x => x.ProductId > 0)
+                .LeftJoin<Categorys>((p,c) => p.CategoryId == c.CategoryId)
+                .Where(x => x.CategoryName == "aa");
+
+            var sql = query.ToString();
+
         }
 
         private static void Delete(DapperDbContext db)
@@ -42,8 +53,9 @@ namespace Dapper.Demo
 
         private static void WhereTest(DapperDbContext db)
         {
-            db.Query<Products>(x => x.CategoryId > 0).ToList();
-            
+            var list = db.Query<Products>(x => x.CategoryId > 75).ToList();
+
+
             db.Query<Products>(x=>x.ProductId>0).Where(x => x.CategoryId > 0).Where(x=>x.ProductName=="22").ToList();
 
             var aa = new List<int>() {1,2};//只支持List类型

@@ -8,6 +8,9 @@ namespace Dapper.Linq
     public interface IQuery<T>
     {
         IQuery<TResult> Select<TResult>(Expression<Func<T,TResult>> selector);
+        IQuery<TResult> Join<TResult>(Expression<Func<T,TResult,bool>> expression);
+        IQuery<TResult> LeftJoin<TResult>(Expression<Func<T,TResult,bool>> expression);
+        IQuery<TResult> RightJoin<TResult>(Expression<Func<T,TResult,bool>> expression);
         IQuery<T> Where(Expression<Func<T,bool>> predicate);
         IQuery<T> OrderBy(Expression<Func<T,object>> predicate);
         IQuery<T> OrderByDescending(Expression<Func<T,object>> predicate);

@@ -62,7 +62,11 @@ namespace Dapper.Linq
 
         public string GetQueryPageString(int pageIndex,int pageSize)
         {
-            return Adapter.QueryStringPage(Table, SelectField, Where.ToString(), Order, pageSize, pageIndex);
+            var selection = string.Join(",",SelectField);
+
+            var order = Order.Count > 0 ? " ORDER BY " + string.Join(",",Order) : "";
+
+            return Adapter.QueryStringPage(Table,selection, Where.ToString(),order, pageSize, pageIndex);
         }
 
         public string NextParamId()

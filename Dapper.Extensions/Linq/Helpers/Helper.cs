@@ -107,6 +107,14 @@ namespace Dapper.Linq.Helpers
             return null;
         }
 
+        internal static BinaryExpression GetBinaryExpression(Expression expression)
+        {
+            if (expression is BinaryExpression)
+                return expression as BinaryExpression;
+
+            throw new ArgumentException("Binary expression expected");
+        }
+
 
 
         internal static object GetValueFromExpression(Expression expression)
