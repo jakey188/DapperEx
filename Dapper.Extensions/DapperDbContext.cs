@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq.Expressions;
@@ -22,24 +24,64 @@ namespace Dapper
         public IDbTransaction Transaction { get; set; }
 
         /// <summary>
+        /// 数据库类型
+        /// </summary>
+        public DbType DbType { get; set; }
+
+        /// <summary>
         /// 初始化连接字符
         /// </summary>
         /// <param name="connectionStringName">连接字符串名称</param>
-        /// <param name="dbType">数据库类型</param>
-        public DapperDbContext(string connectionStringName,DbType dbType = DbType.MSSQL)
+        public DapperDbContext(string connectionStringName)
         {
             if (string.IsNullOrWhiteSpace(connectionStringName))
-                throw new Exception("connectionStringName is not entity");
+                throw new Exception("connectionStringName不能为空");
 
-            //string connectionString = ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+            var configurationManager = ConfigurationManager.ConnectionStrings[connectionStringName];
 
-            if (dbType == DbType.MSSQL)
+            SetDbType(configurationManager.ProviderName);
+
+            CreateConnection(configurationManager.ConnectionString);
+        }
+
+        /// <summary>
+        /// 建立DbConnection
+        /// </summary>
+        /// <param name="connectionString"></param>
+        private void CreateConnection(string connectionString)
+        {
+            if (DbType == DbType.MSSQL)
             {
-                Connection = new SqlConnection(connectionStringName);
+                Connection = new SqlConnection(connectionString);
             }
 
             if (Connection.State != ConnectionState.Open && Connection.State != ConnectionState.Connecting)
                 Connection.Open();
+        }
+
+        /// <summary>
+        /// 适配数据库类型
+        /// </summary>
+        /// <param name="providerName"></param>
+        private void SetDbType(string providerName)
+        {
+            if (string.IsNullOrEmpty(providerName))
+                throw new Exception("请设置connectionStringName的providerName");
+
+
+            switch (providerName)
+            {
+                case "System.Data.SqlClient":
+                    DbType = DbType.MSSQL;
+                    break;
+                case "MySqlClient":
+                    DbType = DbType.MySQL;
+                    break;
+                default:
+                    DbType = DbType.MSSQL;
+                    break;
+            }
+
         }
 
         /// <summary>
@@ -204,10 +246,35 @@ namespace Dapper
         /// <param name="param">sql参数</param>
         /// <param name="commandType"></param>
         /// <returns></returns>
-        public object SqlQuery<T>(string sql, object param, CommandType? commandType = null)
+        public List<T> SqlQuery<T>(string sql, object param, CommandType? commandType = null)
         {
             return Connection.Query<T>(sql: sql, param: param, transaction: Transaction, buffered: true,
-                commandTimeout: null, commandType: commandType);
+                commandTimeout: null, commandType: commandType).AsList();
+        }
+
+        /// <summary>
+        /// 查询纯SQL方法
+        /// </summary>
+        /// <param name="sql">sql查询语句</param>
+        /// <param name="param">sql参数</param>
+        /// <param name="commandType"></param>
+        /// <returns></returns>
+        public List<T> SqlPageQuery<T>(string table,string where,string select,string order,object parametes,int pageIndex,int pageSize,out int total)
+        {
+            total = 0;
+            if (pageIndex < 1)
+                pageIndex = 1;
+
+            var sql = new SqlAdapter().QueryStringPage(table,select,where,order,pageSize,pageIndex);
+
+            var data = Connection.Query<T>(sql: sql,param: parametes,transaction: Transaction).AsList();
+
+            if (data != null && data.Count > 0 && pageSize > 0)
+            {
+                total = Connection.ExecuteScalar<int>($"SELECT COUNT(*) FROM {table} {where}",parametes);
+            }
+
+            return data;
         }
 
         public void Dispose()

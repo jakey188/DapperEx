@@ -26,25 +26,13 @@ namespace Dapper.Linq
         }
 
 
-        public string QueryStringPage(string source,List<string> selectList,string conditions,List<string> orderList,
-            int pageSize,int pageNumber)
+        public string QueryStringPage(string source,string select,string conditions,string order, int pageSize,int pageNumber)
         {
-            
-            var selection = string.Join(",",selectList);
-
-            var order = orderList.Count > 0 ? " ORDER BY " + string.Join(",",orderList) : "";
-
-            var innerQuery = $"SELECT {selection},ROW_NUMBER() OVER ({order}) AS RN FROM {source} {conditions}";
+            var innerQuery = $"SELECT {select},ROW_NUMBER() OVER ({order}) AS RN FROM {source} {conditions}";
 
             return $"SELECT TOP {pageSize} * FROM ({innerQuery}) InnerQuery WHERE RN > {pageSize * (pageNumber - 1)} ORDER BY RN";
         }
 
-        public string QueryStringPage12(string source,string selection,string conditions,string order,
-            int pageSize,int pageNumber)
-        {
-            return
-                $"SELECT {selection} FROM {source} {conditions} {order} OFFSET {pageSize * (pageNumber - 1)} ROWS FETCH NEXT {pageSize} ROWS ONLY";
-        }
 
         public string Table(string tableName,string tableAliasName)
         {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Dapper.Linq.Builder;
 using Dapper.Linq.Builder.Clauses;
+using Dapper.Linq.Helpers;
 
 namespace Dapper.Linq
 {
@@ -86,17 +87,18 @@ namespace Dapper.Linq
         public List<T> ToPageList(int pageIndex,int pageSize,out int total)
         {
             total = 0;
-            if (pageSize > 0)
+            if (pageIndex < 1)
+                pageIndex = 1;
+
+            var data = _connection.Query<T>(_builder.GetQueryPageString(pageIndex,pageSize),_builder.Parameters,_transaction).AsList<T>();
+
+            if (data != null && data.Count > 0 && pageSize > 0)
             {
                 total = _connection.ExecuteScalar<int>($"SELECT COUNT(*) FROM {_builder.Table} {_builder.Where}",
-                    _builder.Parameters);
-                if (pageIndex < 1)
-                    pageIndex = 1;
+                   _builder.Parameters);
             }
 
-            string sql = _builder.GetQueryPageString(pageIndex, pageSize);
-
-            return _connection.Query<T>(sql,_builder.Parameters,_transaction).AsList<T>();
+            return data;
         }
 
 
@@ -250,7 +252,64 @@ namespace Dapper.Linq
             return this;
         }
 
-        public string ToString()
+        public IQuery<TResult> Join<TResult>(Expression<Func<T,TResult,bool>> expression)
+        {
+            new JoinClause<T>(_builder).Build(expression,JoinType.InnerJoin);
+
+            var builder = new SqlBuilder<TResult>
+            {
+                Adapter = _builder.Adapter,
+                Table = _builder.Table,
+                Parameters = _builder.Parameters,
+                Take = _builder.Take,
+                Where = _builder.Where,
+                Order = _builder.Order,
+                GroupBy = _builder.GroupBy,
+                SelectField = _builder.SelectField
+            };
+
+            return new Query<TResult>(builder,this._connection,this._transaction);
+        }
+
+        public IQuery<TResult> LeftJoin<TResult>(Expression<Func<T,TResult,bool>> expression)
+        {
+            new JoinClause<T>(_builder).Build(expression,JoinType.LeftJoin);
+
+            var builder = new SqlBuilder<TResult>
+            {
+                Adapter = _builder.Adapter,
+                Table = _builder.Table,
+                Parameters = _builder.Parameters,
+                Take = _builder.Take,
+                Where = _builder.Where,
+                Order = _builder.Order,
+                GroupBy = _builder.GroupBy,
+                SelectField = _builder.SelectField
+            };
+
+            return new Query<TResult>(builder,this._connection,this._transaction);
+        }
+
+        public IQuery<TResult> RightJoin<TResult>(Expression<Func<T,TResult,bool>> expression)
+        {
+            new JoinClause<T>(_builder).Build(expression,JoinType.RightJoin);
+
+            var builder = new SqlBuilder<TResult>
+            {
+                Adapter = _builder.Adapter,
+                Table = _builder.Table,
+                Parameters = _builder.Parameters,
+                Take = _builder.Take,
+                Where = _builder.Where,
+                Order = _builder.Order,
+                GroupBy = _builder.GroupBy,
+                SelectField = _builder.SelectField
+            };
+
+            return new Query<TResult>(builder,this._connection,this._transaction);
+        }
+
+        public override string ToString()
         {
             return _builder.GetQueryString();
         }

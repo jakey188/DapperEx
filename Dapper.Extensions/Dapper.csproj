@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,6 +48,7 @@
     <Compile Include="Dapper\SqlMapperAsync.cs" />
     <Compile Include="DbType.cs" />
     <Compile Include="Linq\Builder\Clauses\GroupByClause.cs" />
+    <Compile Include="Linq\Builder\Clauses\JoinClause.cs" />
     <Compile Include="Linq\Builder\Clauses\SelectClause.cs" />
     <Compile Include="Linq\Builder\Visitors\ExpressionResolve.cs" />
     <Compile Include="Linq\Builder\Clauses\OrderByClause.cs" />

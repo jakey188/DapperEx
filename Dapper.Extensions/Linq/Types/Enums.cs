@@ -18,4 +18,12 @@
         MAX,
         AVG
     }
+
+    public enum JoinType
+    {
+        InnerJoin,
+        LeftJoin,
+        RightJoin,
+        FullJoin
+    }
 }
