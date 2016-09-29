@@ -252,62 +252,62 @@ namespace Dapper.Linq
             return this;
         }
 
-        public IQuery<TResult> Join<TResult>(Expression<Func<T,TResult,bool>> expression)
-        {
-            new JoinClause<T>(_builder).Build(expression,JoinType.InnerJoin);
+        //public IQuery<TResult> Join<TResult>(Expression<Func<T,TResult,bool>> expression)
+        //{
+        //    new JoinClause<T>(_builder).Build(expression,JoinType.InnerJoin);
 
-            var builder = new SqlBuilder<TResult>
-            {
-                Adapter = _builder.Adapter,
-                Table = _builder.Table,
-                Parameters = _builder.Parameters,
-                Take = _builder.Take,
-                Where = _builder.Where,
-                Order = _builder.Order,
-                GroupBy = _builder.GroupBy,
-                SelectField = _builder.SelectField
-            };
+        //    var builder = new SqlBuilder<TResult>
+        //    {
+        //        Adapter = _builder.Adapter,
+        //        Table = _builder.Table,
+        //        Parameters = _builder.Parameters,
+        //        Take = _builder.Take,
+        //        Where = _builder.Where,
+        //        Order = _builder.Order,
+        //        GroupBy = _builder.GroupBy,
+        //        SelectField = _builder.SelectField
+        //    };
 
-            return new Query<TResult>(builder,this._connection,this._transaction);
-        }
+        //    return new Query<TResult>(builder,this._connection,this._transaction);
+        //}
 
-        public IQuery<TResult> LeftJoin<TResult>(Expression<Func<T,TResult,bool>> expression)
-        {
-            new JoinClause<T>(_builder).Build(expression,JoinType.LeftJoin);
+        //public IQuery<TResult> LeftJoin<TResult>(Expression<Func<T,TResult,bool>> expression)
+        //{
+        //    new JoinClause<T>(_builder).Build(expression,JoinType.LeftJoin);
 
-            var builder = new SqlBuilder<TResult>
-            {
-                Adapter = _builder.Adapter,
-                Table = _builder.Table,
-                Parameters = _builder.Parameters,
-                Take = _builder.Take,
-                Where = _builder.Where,
-                Order = _builder.Order,
-                GroupBy = _builder.GroupBy,
-                SelectField = _builder.SelectField
-            };
+        //    var builder = new SqlBuilder<TResult>
+        //    {
+        //        Adapter = _builder.Adapter,
+        //        Table = _builder.Table,
+        //        Parameters = _builder.Parameters,
+        //        Take = _builder.Take,
+        //        Where = _builder.Where,
+        //        Order = _builder.Order,
+        //        GroupBy = _builder.GroupBy,
+        //        SelectField = _builder.SelectField
+        //    };
 
-            return new Query<TResult>(builder,this._connection,this._transaction);
-        }
+        //    return new Query<TResult>(builder,this._connection,this._transaction);
+        //}
 
-        public IQuery<TResult> RightJoin<TResult>(Expression<Func<T,TResult,bool>> expression)
-        {
-            new JoinClause<T>(_builder).Build(expression,JoinType.RightJoin);
+        //public IQuery<TResult> RightJoin<TResult>(Expression<Func<T,TResult,bool>> expression)
+        //{
+        //    new JoinClause<T>(_builder).Build(expression,JoinType.RightJoin);
 
-            var builder = new SqlBuilder<TResult>
-            {
-                Adapter = _builder.Adapter,
-                Table = _builder.Table,
-                Parameters = _builder.Parameters,
-                Take = _builder.Take,
-                Where = _builder.Where,
-                Order = _builder.Order,
-                GroupBy = _builder.GroupBy,
-                SelectField = _builder.SelectField
-            };
+        //    var builder = new SqlBuilder<TResult>
+        //    {
+        //        Adapter = _builder.Adapter,
+        //        Table = _builder.Table,
+        //        Parameters = _builder.Parameters,
+        //        Take = _builder.Take,
+        //        Where = _builder.Where,
+        //        Order = _builder.Order,
+        //        GroupBy = _builder.GroupBy,
+        //        SelectField = _builder.SelectField
+        //    };
 
-            return new Query<TResult>(builder,this._connection,this._transaction);
-        }
+        //    return new Query<TResult>(builder,this._connection,this._transaction);
+        //}
 
         public override string ToString()
         {

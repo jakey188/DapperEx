@@ -18,7 +18,7 @@ namespace Dapper.Linq.Builder.Clauses
 
             resolve.VisitMember(expression).ForEach(x =>
             {
-                var order = _builder.Adapter.Field(x.TableName,x.FieldName);
+                var order = _builder.Adapter.Field(_builder.IsEnableAlias ? x.TableAliasName : x.TableName,x.FieldName);
                 _builder.Order.Add(order + (desc ? " DESC " : " ASC "));
             });
         }

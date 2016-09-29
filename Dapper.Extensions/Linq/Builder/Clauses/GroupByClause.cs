@@ -22,9 +22,9 @@ namespace Dapper.Linq.Builder.Clauses
             var memberList = new List<string>();
             resolve.VisitMember(expression).ForEach(x =>
             {
-                memberList.Add(_builder.Adapter.Field(x.TableName, x.FieldName));
+                memberList.Add(_builder.Adapter.Field((_builder.IsEnableAlias ? x.TableAliasName : x.TableName),x.FieldName));
             });
-            _builder.GroupBy = " GROUP BY " + string.Join(",", memberList);
+            _builder.GroupBy = " GROUP BY " + string.Join(",",memberList);
         }
     }
 }

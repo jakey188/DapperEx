@@ -12,25 +12,25 @@ namespace Dapper.Demo
 
         public static void Create(DapperDbContext db)
         {
-            Join(db);
+            //Join(db);
             //Delete(db);
             //Update(db);
             //PagedTest(db);
-            //WhereTest(db);
-            //SelectTest(db);
-            //GroupByTest(db);
-            //TakeTest(db);
+            WhereTest(db);
+            SelectTest(db);
+            GroupByTest(db);
+            TakeTest(db);
         }
 
-        private static void Join(DapperDbContext db)
-        {
-            var query = db.Query<Products>().Where(x => x.ProductId > 0)
-                .LeftJoin<Categorys>((p,c) => p.CategoryId == c.CategoryId)
-                .Where(x => x.CategoryName == "aa");
+        //private static void Join(DapperDbContext db)
+        //{
+        //    var query = db.Query<Products>().Where(x => x.ProductId > 0)
+        //        .LeftJoin<Categorys>((p,c) => p.CategoryId == c.CategoryId)
+        //        .Where(x => x.CategoryName == "aa");
 
-            var sql = query.ToString();
+        //    var sql = query.ToString();
 
-        }
+        //}
 
         private static void Delete(DapperDbContext db)
         {

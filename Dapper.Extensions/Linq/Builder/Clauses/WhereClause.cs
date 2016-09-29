@@ -37,10 +37,16 @@ namespace Dapper.Linq.Builder.Clauses
 
         protected override Expression VisitMember(MemberExpression node)
         {
-            if (node.Expression!=null && Helper.IsSpecificMemberExpression(node, node.Expression.Type,
-                CacheHelper.GetTableInfo(node.Expression.Type).Columns))
+            var table = CacheHelper.GetTableInfo(node.Expression.Type);
+
+            if (node.Expression!=null && Helper.IsSpecificMemberExpression(node, node.Expression.Type,table.Columns))
             {
-                ColumnName(Helper.GetPropertyNameWithIdentifierFromExpression(node));
+                var propertyName = Helper.GetPropertyNameWithIdentifierFromExpression(node);
+
+                var column = string.Format("[{0}].[{1}]", (_builder.IsEnableAlias ? table.Alias : table.Name),propertyName);
+
+                ColumnName(column);
+
                 return node;
             }
             else if (Helper.IsVariable(node))

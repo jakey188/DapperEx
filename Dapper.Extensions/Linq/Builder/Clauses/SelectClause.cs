@@ -18,8 +18,13 @@ namespace Dapper.Linq.Builder.Clauses
         {
             var resolve = new ExpressionResolve();
             _builder.SelectField = new List<string>();
+
+
+
             _builder.SelectField =
-                resolve.VisitMember(expression).Select(x => _builder.Adapter.Field(x.TableName, x.FieldName, x.FiledAliasName)).ToList();
+                resolve.VisitMember(expression).Select(x =>
+                _builder.Adapter.Field((_builder.IsEnableAlias ? x.TableAliasName : x.TableName),x.FieldName,x.FiledAliasName))
+                .ToList();
         }
 
 
@@ -46,8 +51,7 @@ namespace Dapper.Linq.Builder.Clauses
                         break;
                 }
 
-                _builder.SelectField.Add(string.Format(field,
-                    _builder.Adapter.Field(x.TableName, x.FieldName, x.FiledAliasName)));
+                _builder.SelectField.Add(string.Format(field,_builder.Adapter.Field(_builder.IsEnableAlias ? x.TableAliasName : x.TableName, x.FieldName, x.FiledAliasName)));
             });
         }
     }
