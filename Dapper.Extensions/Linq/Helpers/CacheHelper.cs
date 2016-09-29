@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -34,15 +33,20 @@ namespace Dapper.Linq.Helpers
             if (!TypeTableInfo.TryGetValue(type,out tableInfo))
             {
                 var properties = new Dictionary<string,string>();
+
                 type.GetProperties().ToList().ForEach(
                         x =>
                         {
-                            var col = (ColumnAttribute)x.GetCustomAttribute(typeof(ColumnAttribute));
+                            //var col = (ColumnAttribute)x.GetCustomAttribute(typeof(ColumnAttribute));
+
+                            var col = x.GetCustomAttributes(false).Where(attr => attr.GetType().Name == "ColumnAttribute").SingleOrDefault() as dynamic;
+
                             properties.Add(x.Name,(col != null) ? col.Name : x.Name);
                         }
                     );
 
-                var attrib = (TableAttribute)type.GetCustomAttribute(typeof(TableAttribute));
+                //var attrib = (TableAttribute)type.GetCustomAttribute(typeof(TableAttribute));
+                var attrib = type.GetCustomAttributes(false).Where(attr => attr.GetType().Name == "TableAttribute").SingleOrDefault() as dynamic;
 
                 tableInfo = new TableInfo
                 {

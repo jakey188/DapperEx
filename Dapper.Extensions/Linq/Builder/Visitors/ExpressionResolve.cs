@@ -40,7 +40,8 @@ namespace Dapper.Linq.Builder.Visitors
                         {
                             FieldName = node.FieldName,
                             FiledAliasName = item.Member.Name == node.FieldName ? "" : item.Member.Name,
-                            TableName = node.TableName
+                            TableName = node.TableName,
+                            TableAliasName = node.TableAliasName
                         };
                         list.Add(model);
                     }
@@ -54,7 +55,8 @@ namespace Dapper.Linq.Builder.Visitors
             var member = CacheHelper.GetTableInfo(memberExpression);
             return new MemberNode()
             {
-                TableName = member.Alias,
+                TableName = member.Name,
+                TableAliasName = member.Alias,
                 FieldName = Helper.GetPropertyNameFromExpression(memberExpression)
             };
         }

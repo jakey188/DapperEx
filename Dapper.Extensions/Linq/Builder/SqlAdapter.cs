@@ -34,15 +34,29 @@ namespace Dapper.Linq
         }
 
 
-        public string Table(string tableName,string tableAliasName)
+        /// <summary>
+        /// 设置表名
+        /// </summary>
+        /// <param name="tableName">表名</param>
+        /// <param name="tableAliasName">表别名</param>
+        /// <returns></returns>
+        public string Table(string tableName,string tableAliasName="")
         {
+            if(string.IsNullOrEmpty(tableAliasName))
+                return $"[{tableName}]";
             return $"[{tableName}] AS [{tableAliasName}]";
         }
 
-
-        public string Field(string tableAliasName,string fieldName,string aliasName="")
+        /// <summary>
+        /// 设置列
+        /// </summary>
+        /// <param name="tableName">表名</param>
+        /// <param name="tableAliasName">表别名</param>
+        /// <param name="fieldAliasName">字段别名</param>
+        /// <returns></returns>
+        public string Field(string tableName,string fieldName,string fieldAliasName = "")
         {
-            return $"[{tableAliasName}].[{fieldName}]{(string.IsNullOrEmpty(aliasName) ? "" : " AS ["+aliasName+"]")}";
+            return $"[{tableName}].[{fieldName}]{(string.IsNullOrEmpty(fieldAliasName) ? "" : " AS [" + fieldAliasName + "]")}";
         }
 
         public string Parameter(string parameterId)

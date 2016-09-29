@@ -7,7 +7,6 @@ using System.Linq.Expressions;
 using Dapper.Contrib.Extensions;
 using Dapper.Linq;
 using Dapper.Linq.Builder.Clauses;
-using DbType = Dapper.Data.DbType;
 
 namespace Dapper
 {
@@ -26,7 +25,11 @@ namespace Dapper
         /// <summary>
         /// 数据库类型
         /// </summary>
-        public DbType DbType { get; set; }
+        public EnmDbType DbType { get; set; }
+
+        public DapperDbContext() {
+
+        }
 
         /// <summary>
         /// 初始化连接字符
@@ -39,7 +42,10 @@ namespace Dapper
 
             var configurationManager = ConfigurationManager.ConnectionStrings[connectionStringName];
 
-            SetDbType(configurationManager.ProviderName);
+            if (string.IsNullOrEmpty(configurationManager.ProviderName))
+                throw new Exception("请设置connectionStringName的providerName");
+
+            DbType = EnmDbType.MSSQL;
 
             CreateConnection(configurationManager.ConnectionString);
         }
@@ -50,39 +56,12 @@ namespace Dapper
         /// <param name="connectionString"></param>
         private void CreateConnection(string connectionString)
         {
-            if (DbType == DbType.MSSQL)
-            {
-                Connection = new SqlConnection(connectionString);
-            }
-
+            Connection = new SqlConnection(connectionString);
+            
             if (Connection.State != ConnectionState.Open && Connection.State != ConnectionState.Connecting)
                 Connection.Open();
         }
 
-        /// <summary>
-        /// 适配数据库类型
-        /// </summary>
-        /// <param name="providerName"></param>
-        private void SetDbType(string providerName)
-        {
-            if (string.IsNullOrEmpty(providerName))
-                throw new Exception("请设置connectionStringName的providerName");
-
-
-            switch (providerName)
-            {
-                case "System.Data.SqlClient":
-                    DbType = DbType.MSSQL;
-                    break;
-                case "MySqlClient":
-                    DbType = DbType.MySQL;
-                    break;
-                default:
-                    DbType = DbType.MSSQL;
-                    break;
-            }
-
-        }
 
         /// <summary>
         /// 开始事务操作
@@ -172,10 +151,10 @@ namespace Dapper
         public int Delete<T>(Expression<Func<T,bool>> expression) where T : class
         {
             if (expression == null) return 0;
-            var builder = new SqlBuilder<T>();
+            var builder = new SqlBuilder<T>(false);
             var resolve =new  WhereExpressionVisitor<T>();
             resolve.Evaluate(expression,builder);
-            string sql = $"DELETE [{builder.TableAliasName}] FROM {builder.Table} {builder.Where}";
+            string sql = $"DELETE {builder.Table} FROM {builder.Table} {builder.Where}";
             return Connection.Execute(sql, builder.Parameters, Transaction);
         }
 
@@ -191,7 +170,7 @@ namespace Dapper
         {
             if (whereExpression == null)
                 return 0;
-            var builder = new SqlBuilder<T>();
+            var builder = new SqlBuilder<T>(false);
             var resolve = new WhereExpressionVisitor<T>();
             resolve.Evaluate(whereExpression,builder);
 
@@ -216,12 +195,12 @@ namespace Dapper
                     var lambda = Expression.Lambda(memberExpression, null);
                     value = lambda.Compile().DynamicInvoke();
                 }
-                set += $"[{builder.TableAliasName}].[{name}]=@{name}";
+                set += $"[{name}]=@{name}";
                 if (i < bindingCount) set += ", ";
                 builder.Parameters.Add(name, value);
             }
 
-            string sql = $"UPDATE [{builder.TableAliasName}] SET {set}  FROM {builder.Table} {builder.Where}";
+            string sql = $"UPDATE {builder.Table} SET {set} {builder.Where}";
 
             return Connection.Execute(sql, builder.Parameters, Transaction);
         }

@@ -30,6 +30,7 @@ namespace Dapper.Linq
     internal class MemberNode
     {
         public string TableName { get; set; }
+        public string TableAliasName { get; set; }
         public string FieldName { get; set; }
         public string FiledAliasName { get; set; }
     }

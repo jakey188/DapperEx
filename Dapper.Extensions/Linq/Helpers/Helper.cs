@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -77,7 +76,7 @@ namespace Dapper.Linq.Helpers
             var table = CacheHelper.GetTableInfo(((MemberExpression)exp).Expression.Type);
             var member = ((MemberExpression)exp).Member;
 
-            return string.Format("{0}.[{1}]", table.Alias, table.Columns[member.Name]);
+            return table.Columns[member.Name];
         }
 
         /// <summary>
