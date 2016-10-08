@@ -7,7 +7,7 @@ using System.Data.SQLite;
 
 namespace Dapper
 {
-    public class SQLiteDbContext: DapperDbContext , IDisposable
+    public class SQLiteDbContext:DapperDbContext
     {
         /// <summary>
         /// 初始化连接字符
@@ -35,9 +35,29 @@ namespace Dapper
         private void CreateConnection(string connectionString)
         {
             Connection = new SQLiteConnection(connectionString);
-            
+
             if (Connection.State != ConnectionState.Open && Connection.State != ConnectionState.Connecting)
                 Connection.Open();
+        }
+
+        /// <summary>
+        /// 返回DataTable
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public override DataTable SqlQueryDataTable(string sql,object param = null)
+        {
+            var dataAdapter = new SQLiteDataAdapter(sql,(SQLiteConnection)Connection);
+            if (param != null)
+                dataAdapter.SelectCommand.Parameters.Add(param);
+
+            DataTable dt = new DataTable();
+
+            dataAdapter.Fill(dt);
+            dataAdapter.SelectCommand.Parameters.Clear();
+
+            return dt;
         }
     }
 }
