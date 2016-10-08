@@ -20,16 +20,16 @@ namespace Dapper.Demo
             //var list = new List<Products>(); 
             SqlLiteTest();
 
-            using (var db = new DapperDbContext("Group_Set"))
-            {
-                LinqTestcs.Create(db);
-                for (var i = 0;i < 100;i++)
-                {
-                    //TimeTest.Init(db);
+            //using (var db = new DapperDbContext("Group_Set"))
+            //{
+            //    LinqTestcs.Create(db);
+            //    for (var i = 0;i < 100;i++)
+            //    {
+            //        //TimeTest.Init(db);
 
-                }
-                LinqTestcs.Create(db);
-            }
+            //    }
+            //    LinqTestcs.Create(db);
+            //}
             Console.ReadKey();
         }
 
@@ -45,6 +45,10 @@ namespace Dapper.Demo
 
                 var aa1 = db.Query<User>(x => x.Id > 12).Select(x=>new { title = x.Name }).ToList();
                 var aa = db.Query<User>(x => x.Id > 0).ToList();
+
+                var d = db.SqlQueryDynamic(" select * from users ",null);
+
+                var dta = db.SqlQueryDataTable(" select * from users ",null);
 
                 db.Update<User>(x => x.Id > 0,x=>new User { Name = "212" });
 
