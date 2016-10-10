@@ -13,22 +13,19 @@ namespace Dapper.Linq
     internal class Grouping<T> : IGrouping<T>
     {
         private readonly SqlBuilder<T> _builder;
-        private readonly IDbConnection _connection;
-        private readonly IDbTransaction _transaction;
-        public Grouping(SqlBuilder<T> builder,IDbConnection connection,IDbTransaction transaction)
+        private readonly DbContext _db;
+        public Grouping(SqlBuilder<T> builder,DbContext db)
         {
             _builder = builder;
-            _connection = connection;
-            _transaction = transaction;
+            _db = db;
         }
 
         public IQuery<TResult> Select<TResult>(Expression<Func<T,TResult>> selector)
         {
             new SelectClause<T>(_builder).Build(selector.Body);
 
-            var builder = new SqlBuilder<TResult>
+            var builder = new SqlBuilder<TResult>(_db.Adapter)
             {
-                Adapter = _builder.Adapter,
                 Table = _builder.Table,
                 Parameters = _builder.Parameters,
                 Take = _builder.Take,
@@ -37,7 +34,7 @@ namespace Dapper.Linq
                 GroupBy = _builder.GroupBy,
                 SelectField = _builder.SelectField
             };
-            return new Query<TResult>(builder,_connection,_transaction);
+            return new Query<TResult>(builder,_db);
         }
     }
 }

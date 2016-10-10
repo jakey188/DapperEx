@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BulkInserts\BulkInsertExtension.cs" />
+    <Compile Include="BulkInserts\Providers\BulkInsertSQLiteProvider.cs" />
     <Compile Include="SQLiteDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

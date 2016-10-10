@@ -68,7 +68,8 @@
   <ItemGroup>
     <Compile Include="Entites\Category.cs" />
     <Compile Include="Entites\DataType.cs" />
-    <Compile Include="LinqTestcs.cs" />
+    <Compile Include="SqlLiteTest.cs" />
+    <Compile Include="SqlServiceTest.cs" />
     <Compile Include="Entites\Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

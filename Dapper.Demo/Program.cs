@@ -18,44 +18,16 @@ namespace Dapper.Demo
         static void Main(string[] args)
         {
             //var list = new List<Products>(); 
-            SqlLiteTest();
 
-            //using (var db = new DapperDbContext("Group_Set"))
-            //{
-            //    LinqTestcs.Create(db);
-            //    for (var i = 0;i < 100;i++)
-            //    {
-            //        //TimeTest.Init(db);
-
-            //    }
-            //    LinqTestcs.Create(db);
-            //}
+            using (var db = new SqlServerDbContext("Group_Set"))
+            {
+                SqlServiceTest.Create(db);
+            }
+            SqlLiteTest.Init();
             Console.ReadKey();
         }
 
-        static void SqlLiteTest() {
-            using (var db = new SQLiteDbContext("SqlLiteName"))
-            {
-
-                //var u = new User {
-                //    Name = "测试"
-                //};
-
-                //db.Add<User>(u);
-
-                var aa1 = db.Query<User>(x => x.Id > 12).Select(x=>new { title = x.Name }).ToList();
-                var aa = db.Query<User>(x => x.Id > 0).ToList();
-
-                var d = db.SqlQueryDynamic(" select * from users ",null);
-
-                var dta = db.SqlQueryDataTable(" select * from users ",null);
-
-                db.Update<User>(x => x.Id > 0,x=>new User { Name = "212" });
-
-                db.Query<User>(x => x.Id == 12).FirstOrDefault();
-
-            }
-        }
+        
 
     }
 

@@ -7,13 +7,11 @@ using System.Reflection;
 
 namespace Dapper.Linq.Helpers
 {
-    
-
-    internal class CacheHelper
+    public class CacheHelper
     {
-        private static readonly ConcurrentDictionary<Type,TableInfo> TypeTableInfo = new ConcurrentDictionary<Type,TableInfo>();
+        static readonly ConcurrentDictionary<Type,TableInfo> TypeTableInfo = new ConcurrentDictionary<Type,TableInfo>();
 
-        internal static int Size
+        public static int Size
         {
             get { return TypeTableInfo.Count; }
         }

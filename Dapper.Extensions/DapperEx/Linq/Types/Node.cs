@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Dapper.Linq
+namespace Dapper
 {
-    internal class TableInfo
+    public class TableInfo
     {
         /// <summary>
         /// 表名
         /// </summary>
-        internal string Name { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// 列名
         /// </summary>
-        internal Dictionary<string,string> Columns { get; set; }
+        public Dictionary<string,string> Columns { get; set; }
         /// <summary>
         /// 别名
         /// </summary>
-        internal string Alias { get; set; }
+        public string Alias { get; set; }
     }
 
     public class MethodCall

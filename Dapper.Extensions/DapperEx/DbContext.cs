@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Data.Common;
-using System.Data.SqlClient;
 using System.Linq.Expressions;
 using Dapper.Contrib.Extensions;
 using Dapper.Linq;
@@ -11,7 +8,7 @@ using Dapper.Linq.Builder.Clauses;
 
 namespace Dapper
 {
-    public class DapperDbContext :IDisposable
+    public class DbContext :IDisposable
     {
         /// <summary>
         /// 数据库连接
@@ -22,46 +19,11 @@ namespace Dapper
         /// </summary>
         public IDbTransaction Transaction { get; set; }
 
-        /// <summary>
-        /// 数据库类型
-        /// </summary>
+
+        public Linq.ISqlAdapter Adapter { get; set; }
+
+
         public EnmDbType DbType { get; set; }
-
-        public DapperDbContext() {
-
-        }
-
-        /// <summary>
-        /// 初始化连接字符
-        /// </summary>
-        /// <param name="connectionStringName">连接字符串名称</param>
-        public DapperDbContext(string connectionStringName)
-        {
-            if (string.IsNullOrWhiteSpace(connectionStringName))
-                throw new Exception("connectionStringName不能为空");
-
-            var configurationManager = ConfigurationManager.ConnectionStrings[connectionStringName];
-
-            if (string.IsNullOrEmpty(configurationManager.ProviderName))
-                throw new Exception("请设置connectionStringName的providerName");
-
-            DbType = EnmDbType.MSSQL;
-
-            CreateConnection(configurationManager.ConnectionString);
-        }
-
-        /// <summary>
-        /// 建立DbConnection
-        /// </summary>
-        /// <param name="connectionString"></param>
-        private void CreateConnection(string connectionString)
-        {
-            Connection = new SqlConnection(connectionString);
-            
-            if (Connection.State != ConnectionState.Open && Connection.State != ConnectionState.Connecting)
-                Connection.Open();
-        }
-
 
         /// <summary>
         /// 开始事务操作
@@ -70,7 +32,7 @@ namespace Dapper
         {
             Transaction = Connection.BeginTransaction();
         }
-        
+
         /// <summary>
         /// 提交数据库事务
         /// </summary>
@@ -93,14 +55,21 @@ namespace Dapper
             }
         }
 
-        /// <summary>
-        /// 转换成可使用Linq的操作对象
-        /// </summary>
-        /// <typeparam name="T">当前T</typeparam>
-        /// <returns></returns>
-        public virtual IQuery<T> Query<T>(Expression<Func<T,bool>> expression=null)
+
+        public void SetAdapter(EnmDbType dbType)
         {
-            return new Query<T>(Connection,Transaction,expression);
+            DbType = dbType;
+
+            switch (dbType)
+            {
+                case EnmDbType.MSSQL:
+                    Adapter = new Linq.SqlServerAdapter();
+                    break;
+                case EnmDbType.SQLite:
+                    Adapter = new Linq.SQLiteAdapter();
+                    break;
+            }
+
         }
 
         /// <summary>
@@ -111,6 +80,24 @@ namespace Dapper
         public virtual long Add<T>(T t) where T : class
         {
             return Connection.Insert(t,Transaction);
+        }
+
+        /// <summary>
+        /// 少批量添加，如需保证数据一致性,请使用事务
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        /// <remarks>建议100条以下</remarks>
+        public virtual long AddRange<T>(List<T> list) where T : class
+        {
+            int row = 0;
+            foreach (var item in list)
+            {
+                var key = Connection.Insert(item,Transaction);
+                if (key > 0)
+                    row++;
+            }
+            return row;
         }
 
         /// <summary>
@@ -150,12 +137,13 @@ namespace Dapper
         /// <returns></returns>
         public virtual int Delete<T>(Expression<Func<T,bool>> expression) where T : class
         {
-            if (expression == null) return 0;
-            var builder = new SqlBuilder<T>(false);
-            var resolve =new  WhereExpressionVisitor<T>();
+            if (expression == null)
+                return 0;
+            var builder = new SqlBuilder<T>(Adapter,false);
+            var resolve = new WhereExpressionVisitor<T>();
             resolve.Evaluate(expression,builder);
             string sql = $"DELETE {builder.Table} FROM {builder.Table} {builder.Where}";
-            return Connection.Execute(sql, builder.Parameters, Transaction);
+            return Connection.Execute(sql,builder.Parameters,Transaction);
         }
 
         /// <summary>
@@ -165,17 +153,17 @@ namespace Dapper
         /// <param name="whereExpression"></param>
         /// <param name="updateExpression"></param>
         /// <returns></returns>
-        public virtual int Update<T>(Expression<Func<T, bool>> whereExpression, Expression<Func<T, T>> updateExpression)
+        public virtual int Update<T>(Expression<Func<T,bool>> whereExpression,Expression<Func<T,T>> updateExpression)
             where T : class
         {
             if (whereExpression == null)
                 return 0;
-            var builder = new SqlBuilder<T>(false);
+            var builder = new SqlBuilder<T>(Adapter,false);
             var resolve = new WhereExpressionVisitor<T>();
             resolve.Evaluate(whereExpression,builder);
 
             string set = string.Empty;
-            var expression = (MemberInitExpression) updateExpression.Body;
+            var expression = (MemberInitExpression)updateExpression.Body;
             int i = 0;
             int bindingCount = expression.Bindings.Count;
             foreach (var binding in expression.Bindings)
@@ -183,7 +171,7 @@ namespace Dapper
                 i++;
                 var name = binding.Member.Name;
                 object value;
-                var memberExpression = ((MemberAssignment) binding).Expression;
+                var memberExpression = ((MemberAssignment)binding).Expression;
 
                 var constantExpression = memberExpression as ConstantExpression;
                 if (constantExpression != null)
@@ -192,17 +180,18 @@ namespace Dapper
                 }
                 else
                 {
-                    var lambda = Expression.Lambda(memberExpression, null);
+                    var lambda = Expression.Lambda(memberExpression,null);
                     value = lambda.Compile().DynamicInvoke();
                 }
                 set += $"[{name}]=@{name}";
-                if (i < bindingCount) set += ", ";
-                builder.Parameters.Add(name, value);
+                if (i < bindingCount)
+                    set += ", ";
+                builder.Parameters.Add(name,value);
             }
 
             string sql = $"UPDATE {builder.Table} SET {set} {builder.Where}";
 
-            return Connection.Execute(sql, builder.Parameters, Transaction);
+            return Connection.Execute(sql,builder.Parameters,Transaction);
         }
 
         /// <summary>
@@ -214,7 +203,7 @@ namespace Dapper
         /// <returns></returns>
         public virtual int ExecuteSqlCommand(string sql,object param,CommandType? commandType = null)
         {
-            return Connection.Execute(sql: sql, param: param, transaction: Transaction, commandTimeout: null,
+            return Connection.Execute(sql: sql,param: param,transaction: Transaction,commandTimeout: null,
                 commandType: commandType);
         }
 
@@ -225,10 +214,10 @@ namespace Dapper
         /// <param name="param">sql参数</param>
         /// <param name="commandType"></param>
         /// <returns></returns>
-        public virtual List<T> SqlQuery<T>(string sql, object param=null, CommandType? commandType = null)
+        public virtual List<T> SqlQuery<T>(string sql,object param = null,CommandType? commandType = null)
         {
-            return Connection.Query<T>(sql: sql, param: param, transaction: Transaction, buffered: true,
-                commandTimeout: null, commandType: commandType).AsList();
+            return Connection.Query<T>(sql: sql,param: param,transaction: Transaction,buffered: true,
+                commandTimeout: null,commandType: commandType).AsList();
         }
 
         /// <summary>
@@ -238,30 +227,9 @@ namespace Dapper
         /// <param name="param">sql参数</param>
         /// <param name="commandType"></param>
         /// <returns></returns>
-        public virtual IEnumerable<dynamic> SqlQueryDynamic(string sql,object param=null,CommandType? commandType = null)
+        public virtual IEnumerable<dynamic> SqlQueryDynamic(string sql,object param = null,CommandType? commandType = null)
         {
             return Connection.Query(sql: sql,param: param,transaction: Transaction,buffered: true,commandTimeout: null,commandType: commandType);
-        }
-
-        /// <summary>
-        /// 返回DataTable
-        /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="param"></param>
-        /// <returns></returns>
-        public virtual DataTable SqlQueryDataTable(string sql,object param = null)
-        {
-            var dataAdapter = new SqlDataAdapter(sql,(SqlConnection)Connection);
-
-            if (param != null)
-                dataAdapter.SelectCommand.Parameters.Add(param);
-
-            DataTable dt = new DataTable();
-
-            dataAdapter.Fill(dt);
-            dataAdapter.SelectCommand.Parameters.Clear();
-
-            return dt;
         }
 
         /// <summary>
@@ -277,7 +245,7 @@ namespace Dapper
             if (pageIndex < 1)
                 pageIndex = 1;
 
-            var sql = new SqlAdapter().QueryStringPage(table,select,where,order,pageSize,pageIndex);
+            var sql = Adapter.QueryStringPage(table,select,where,order,pageSize,pageIndex);
 
             var data = Connection.Query<T>(sql: sql,param: parametes,transaction: Transaction).AsList();
 
@@ -288,6 +256,7 @@ namespace Dapper
 
             return data;
         }
+
 
         public void Dispose()
         {

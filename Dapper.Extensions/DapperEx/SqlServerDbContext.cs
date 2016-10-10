@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Data.SQLite;
 
-namespace Dapper.SQLite
+namespace Dapper
 {
-    public class SQLiteDbContext:DbContext
+    public class SqlServerDbContext : DbContext
     {
+
         /// <summary>
         /// 初始化连接字符
         /// </summary>
         /// <param name="connectionStringName">连接字符串名称</param>
-        public SQLiteDbContext(string connectionStringName)
+        public SqlServerDbContext(string connectionStringName)
         {
             if (string.IsNullOrWhiteSpace(connectionStringName))
                 throw new Exception("connectionStringName不能为空");
@@ -23,8 +23,8 @@ namespace Dapper.SQLite
             if (string.IsNullOrEmpty(configurationManager.ProviderName))
                 throw new Exception("请设置connectionStringName的providerName");
 
-            SetAdapter(EnmDbType.SQLite);
-
+            SetAdapter(EnmDbType.MSSQL);
+           
             CreateConnection(configurationManager.ConnectionString);
         }
 
@@ -34,16 +34,13 @@ namespace Dapper.SQLite
         /// <param name="connectionString"></param>
         private void CreateConnection(string connectionString)
         {
-            Connection = new SQLiteConnection(connectionString);
+            Connection = new SqlConnection(connectionString);
 
             if (Connection.State != ConnectionState.Open && Connection.State != ConnectionState.Connecting)
                 Connection.Open();
         }
 
-        public override long AddRange<T>(List<T> list)
-        {
-            return base.AddRange<T>(list);
-        }
+
 
         /// <summary>
         /// 返回DataTable
@@ -51,9 +48,10 @@ namespace Dapper.SQLite
         /// <param name="sql"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public DataTable SqlQueryDataTable(string sql,object param = null)
+        public  DataTable SqlQueryDataTable(string sql,object param = null)
         {
-            var dataAdapter = new SQLiteDataAdapter(sql,(SQLiteConnection)Connection);
+            var dataAdapter = new SqlDataAdapter(sql,(SqlConnection)Connection);
+
             if (param != null)
                 dataAdapter.SelectCommand.Parameters.Add(param);
 
@@ -64,5 +62,6 @@ namespace Dapper.SQLite
 
             return dt;
         }
+
     }
 }

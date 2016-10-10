@@ -4,9 +4,9 @@
     {
         MSSQL,
 
-        MySQL,
+        //MySQL,
 
-        PostgreSQL,
+        //PostgreSQL,
 
         SQLite
     }
