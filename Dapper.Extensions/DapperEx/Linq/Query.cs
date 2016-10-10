@@ -11,23 +11,20 @@ namespace Dapper.Linq
 {
     internal class Query<T> : IQuery<T>
     {
-        private IDbConnection _connection;
-        private IDbTransaction _transaction;
+        private DbContext _db;
         private SqlBuilder<T> _builder;
 
-        public Query(IDbConnection connection,IDbTransaction transaction,Expression<Func<T,bool>> expression=null)
+        public Query(DbContext db,Expression<Func<T,bool>> expression=null)
         {
-            _connection = connection;
-            _transaction = transaction;
-            _builder = new SqlBuilder<T>();
+            _db = db;
+            _builder = new SqlBuilder<T>(db.Adapter);
             this.Where(expression);
         }
 
-        public Query(SqlBuilder<T> builder,IDbConnection connection,IDbTransaction transaction,Expression<Func<T,bool>> expression = null)
+        public Query(SqlBuilder<T> builder,DbContext db,Expression<Func<T,bool>> expression = null)
         {
+            _db = db;
             _builder = builder;
-            _connection = connection;
-            _transaction = transaction;
             this.Where(expression);
         }
 
@@ -56,9 +53,8 @@ namespace Dapper.Linq
         {
             new SelectClause<T>(_builder).Build(selector.Body);
 
-            var builder = new SqlBuilder<TResult>
+            var builder = new SqlBuilder<TResult>(_db.Adapter)
             {
-                Adapter = _builder.Adapter,
                 Table = _builder.Table,
                 Parameters = _builder.Parameters,
                 Take = _builder.Take,
@@ -67,7 +63,7 @@ namespace Dapper.Linq
                 GroupBy = _builder.GroupBy,
                 SelectField = _builder.SelectField
             };
-            return new Query<TResult>(builder,this._connection,this._transaction);
+            return new Query<TResult>(builder,_db);
         }
 
         /// <summary>
@@ -77,7 +73,7 @@ namespace Dapper.Linq
         public List<T> ToList()
         {
             string sql = _builder.GetQueryString();
-            return _connection.Query<T>(sql,_builder.Parameters,_transaction).AsList<T>();
+            return _db.Connection.Query<T>(sql,_builder.Parameters,_db.Transaction).AsList<T>();
         }
 
         /// <summary>
@@ -90,11 +86,11 @@ namespace Dapper.Linq
             if (pageIndex < 1)
                 pageIndex = 1;
 
-            var data = _connection.Query<T>(_builder.GetQueryPageString(pageIndex,pageSize),_builder.Parameters,_transaction).AsList<T>();
+            var data = _db.Connection.Query<T>(_builder.GetQueryPageString(pageIndex,pageSize),_builder.Parameters,_db.Transaction).AsList<T>();
 
             if (data != null && data.Count > 0 && pageSize > 0)
             {
-                total = _connection.ExecuteScalar<int>($"SELECT COUNT(*) FROM {_builder.Table} {_builder.Where}",
+                total = _db.Connection.ExecuteScalar<int>($"SELECT COUNT(*) FROM {_builder.Table} {_builder.Where}",
                    _builder.Parameters);
             }
 
@@ -110,7 +106,7 @@ namespace Dapper.Linq
         {
             _builder.SelectField = new List<string>() { "Count(*)" };
 
-            return _connection.ExecuteScalar<int>(_builder.GetQueryString(), _builder.Parameters, _transaction);
+            return _db.Connection.ExecuteScalar<int>(_builder.GetQueryString(), _builder.Parameters, _db.Transaction);
         }
 
         /// <summary>
@@ -133,7 +129,7 @@ namespace Dapper.Linq
         public IGrouping<T> GroupBy<TKey>(Expression<Func<T,TKey>> predicate)
         {
             new GroupByClause<T>(_builder).Build(predicate.Body);
-            return new Grouping<T>(_builder, _connection, _transaction);
+            return new Grouping<T>(_builder, _db);
         }
 
         /// <summary>
@@ -181,7 +177,7 @@ namespace Dapper.Linq
         public TResult Max<TResult>(Expression<Func<T,TResult>> selector)
         {
             new SelectClause<T>(_builder).Build(selector.Body,AverageFunction.MAX);
-            return _connection.ExecuteScalar<TResult>(_builder.GetQueryString(),_builder.Parameters,_transaction);
+            return _db.Connection.ExecuteScalar<TResult>(_builder.GetQueryString(),_builder.Parameters,_db.Transaction);
         }
 
         /// <summary>
@@ -193,7 +189,7 @@ namespace Dapper.Linq
         public TResult Min<TResult>(Expression<Func<T,TResult>> selector)
         {
             new SelectClause<T>(_builder).Build(selector.Body,AverageFunction.MIN);
-            return _connection.ExecuteScalar<TResult>(_builder.GetQueryString(),_builder.Parameters,_transaction);
+            return _db.Connection.ExecuteScalar<TResult>(_builder.GetQueryString(),_builder.Parameters,_db.Transaction);
         }
 
         /// <summary>
@@ -205,7 +201,7 @@ namespace Dapper.Linq
         public TResult Sum<TResult>(Expression<Func<T,TResult>> selector)
         {
             new SelectClause<T>(_builder).Build(selector.Body,AverageFunction.SUM);
-            return _connection.ExecuteScalar<TResult>(_builder.GetQueryString(),_builder.Parameters,_transaction);
+            return _db.Connection.ExecuteScalar<TResult>(_builder.GetQueryString(),_builder.Parameters,_db.Transaction);
         }
 
         /// <summary>
@@ -268,7 +264,7 @@ namespace Dapper.Linq
         //        SelectField = _builder.SelectField
         //    };
 
-        //    return new Query<TResult>(builder,this._connection,this._transaction);
+        //    return new Query<TResult>(builder,this._db.Connection,this._db.Transaction);
         //}
 
         //public IQuery<TResult> LeftJoin<TResult>(Expression<Func<T,TResult,bool>> expression)
@@ -287,7 +283,7 @@ namespace Dapper.Linq
         //        SelectField = _builder.SelectField
         //    };
 
-        //    return new Query<TResult>(builder,this._connection,this._transaction);
+        //    return new Query<TResult>(builder,this._db.Connection,this._db.Transaction);
         //}
 
         //public IQuery<TResult> RightJoin<TResult>(Expression<Func<T,TResult,bool>> expression)
@@ -306,7 +302,7 @@ namespace Dapper.Linq
         //        SelectField = _builder.SelectField
         //    };
 
-        //    return new Query<TResult>(builder,this._connection,this._transaction);
+        //    return new Query<TResult>(builder,this._db.Connection,this._db.Transaction);
         //}
 
         public override string ToString()

@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Dapper.Linq.Helpers
 {
-    internal class Helper
+    public class Helper
     {
         internal static bool IsEqualsExpression(Expression exp)
         {
@@ -245,6 +245,7 @@ namespace Dapper.Linq.Helpers
         {
             return (expr is MemberExpression) && (((MemberExpression)expr).Expression is ConstantExpression);
         }
+
 
     }
 }

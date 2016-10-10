@@ -14,13 +14,13 @@ namespace Dapper.Demo
 {
     public class TimeTest
     {
-        public static void Init(DapperDbContext db)
+        public static void Init(SqlServerDbContext db)
         {
             LinqToStringTest(db);
         }
 
 
-        private static void LinqToStringTest(DapperDbContext db)
+        private static void LinqToStringTest(SqlServerDbContext db)
         {
             Stopwatch stopwatch = new Stopwatch();
             

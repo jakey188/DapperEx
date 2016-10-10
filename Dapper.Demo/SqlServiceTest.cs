@@ -7,19 +7,29 @@ using Dapper.Demo.Entites;
 
 namespace Dapper.Demo
 {
-    public class LinqTestcs
+    public class SqlServiceTest
     {
 
-        public static void Create(DapperDbContext db)
+        public static void Create(SqlServerDbContext db)
         {
             //Join(db);
             //Delete(db);
             //Update(db);
             //PagedTest(db);
-            WhereTest(db);
-            SelectTest(db);
-            GroupByTest(db);
-            TakeTest(db);
+            //WhereTest(db);
+            //SelectTest(db);
+            //GroupByTest(db);
+            //TakeTest(db);
+            //BlukInsert(db);
+
+        }
+
+        static void BlukInsert(SqlServerDbContext db)
+        {
+            
+            var datatable = db.SqlQueryDataTable("select * from Products");
+
+            db.BulkInsert("Products",datatable);
         }
 
         //private static void Join(DapperDbContext db)
@@ -32,17 +42,17 @@ namespace Dapper.Demo
 
         //}
 
-        private static void Delete(DapperDbContext db)
+        private static void Delete(SqlServerDbContext db)
         {
             db.Delete<Products>(x => x.ProductId > 70);
         }
 
-        private static void Update(DapperDbContext db)
+        private static void Update(SqlServerDbContext db)
         {
             db.Update<Products>(x => x.ProductId > 70, x => new Products {ProductName = "测试分类1"});
         }
 
-        private static void PagedTest(DapperDbContext db)
+        private static void PagedTest(SqlServerDbContext db)
         {
             int total = 0;
             var a = db.Query<Products>(x=>x.ProductId>0)
@@ -51,7 +61,7 @@ namespace Dapper.Demo
                 .ToPageList(1, 10, out total);
         }
 
-        private static void WhereTest(DapperDbContext db)
+        private static void WhereTest(SqlServerDbContext db)
         {
             var list = db.Query<Products>(x => x.CategoryId > 75).ToList();
 
@@ -68,18 +78,18 @@ namespace Dapper.Demo
 
         }
 
-        private static void GroupByTest(DapperDbContext db)
+        private static void GroupByTest(SqlServerDbContext db)
         {
             db.Query<Products>().GroupBy(x=> new { x.ProductId}).Select(x=>x.ProductId).ToList();
         }
 
-        private static void TakeTest(DapperDbContext db)
+        private static void TakeTest(SqlServerDbContext db)
         {
             db.Query<Products>().Take(10).Select(x => x.ProductId).ToList();
             db.Query<Products>().Take(10).ToList();
         }
 
-        private static void SelectTest(DapperDbContext db)
+        private static void SelectTest(SqlServerDbContext db)
         {
             db.Query<Products>().Select(x => x.ProductId).ToList();
 

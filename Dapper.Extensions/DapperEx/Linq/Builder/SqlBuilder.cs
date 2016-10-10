@@ -43,6 +43,9 @@ namespace Dapper.Linq
         /// </summary>
         public List<string> Order { get; set; } = new List<string>();
 
+        /// <summary>
+        /// 分组字段
+        /// </summary>
         public string GroupBy { get; set; }
 
         /// <summary>
@@ -53,7 +56,7 @@ namespace Dapper.Linq
         /// <summary>
         /// SQL生成适配器
         /// </summary>
-        public SqlAdapter Adapter;
+        public ISqlAdapter Adapter { get; }
 
         /// <summary>
         /// 是否启用别名
@@ -61,21 +64,25 @@ namespace Dapper.Linq
         public bool IsEnableAlias { get; private set; }
 
 
-        public SqlBuilder(bool isEnableAlias = true)
+        public SqlBuilder(ISqlAdapter adapter, bool isEnableAlias = true)
         {
             var table = CacheHelper.GetTableInfo(typeof(T));
             Where = new StringBuilder();
-            Adapter = new SqlAdapter();
             Parameters = new DynamicParameters();
             SelectField = new List<string> { "*" };
             TableAliasName = table.Alias;
             IsEnableAlias = isEnableAlias;
+            Adapter = adapter;
             Table = isEnableAlias ? Adapter.Table(table.Name,table.Alias) : Adapter.Table(table.Name);
         }
 
         public string GetQueryString()
         {
-            return Adapter.QueryString(Take, SelectField, Table, Where.ToString(), Order, GroupBy, "");
+            var selection = string.Join(",",SelectField);
+
+            var order = Order.Count > 0 ? " ORDER BY " + string.Join(",",Order) : "";
+
+            return Adapter.QueryString(Take,selection, Table, Where.ToString(),order, GroupBy, "");
         }
 
         public string GetQueryPageString(int pageIndex,int pageSize)
@@ -97,5 +104,6 @@ namespace Dapper.Linq
         {
             Parameters.Add(key,value);
         }
+
     }
 }
