@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Data.SQLite;
 
 namespace Dapper.SQLite
 {
-    public class SQLiteDbContext:DbContext
+    public class SQLiteDbContext : DbContext
     {
         /// <summary>
         /// 初始化连接字符
@@ -38,11 +36,6 @@ namespace Dapper.SQLite
 
             if (Connection.State != ConnectionState.Open && Connection.State != ConnectionState.Connecting)
                 Connection.Open();
-        }
-
-        public override long AddRange<T>(List<T> list)
-        {
-            return base.AddRange<T>(list);
         }
 
         /// <summary>

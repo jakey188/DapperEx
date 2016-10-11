@@ -74,20 +74,20 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimeTest.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="Entites\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dapper.Extensions\Dapper.csproj">
-      <Project>{3be5f91a-14b4-460c-97c0-4cc8bbf26874}</Project>
-      <Name>Dapper</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Dapper.SQLite\Dapper.SQLite.csproj">
       <Project>{2f50c03e-f208-46b3-8b55-480da653113b}</Project>
       <Name>Dapper.SQLite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dapper\Dapper.csproj">
+      <Project>{3be5f91a-14b4-460c-97c0-4cc8bbf26874}</Project>
+      <Name>Dapper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

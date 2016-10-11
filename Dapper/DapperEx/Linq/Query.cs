@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
-using Dapper.Linq.Builder;
 using Dapper.Linq.Builder.Clauses;
-using Dapper.Linq.Helpers;
 
 namespace Dapper.Linq
 {

@@ -52,9 +52,8 @@
     <Compile Include="SQLiteDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Dapper.Extensions\Dapper.csproj">
+    <ProjectReference Include="..\Dapper\Dapper.csproj">
       <Project>{3be5f91a-14b4-460c-97c0-4cc8bbf26874}</Project>
       <Name>Dapper</Name>
     </ProjectReference>
