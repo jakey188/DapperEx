@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper.SQLite;
+using System.Diagnostics;
+using System.Data;
 
 namespace Dapper.Demo
 {
@@ -15,7 +17,7 @@ namespace Dapper.Demo
             {
                 //Add(db);
                 //Query(db);
-                BulkInsert(db);
+                //BulkInsert(db);
             }
         }
 
@@ -34,12 +36,36 @@ namespace Dapper.Demo
 
         private static void BulkInsert(SQLiteDbContext db)
         {
+            Stopwatch sw = new Stopwatch();
 
-            var list = db.SqlQueryDataTable("select Name,Gender,Age,CityId,OpTime from Users LIMIT 2");
-            db.BulkInsert("Users",list);
+            var dataTable = db.SqlQueryDataTable("select Name,Gender,Age,CityId,OpTime from Users LIMIT 1");
 
-            //var list = db.Query<User>(x => x.Id > 0).Take(2).ToList();
-            //db.BulkInsert<User>("Users", list);
+            DataTable dtNew = dataTable.Copy();
+            dtNew.Clear();  //清楚数据
+
+            for (var i = 0;i < 100000;i++)
+            {
+                dtNew.Rows.Add(dataTable.Rows[0].ItemArray);  //添加数据行
+            }
+            sw.Reset();
+            sw.Start();
+            db.BulkInsert("Users",dtNew);
+            sw.Stop();
+            Console.WriteLine("BulkInsert DataTable 耗时：" + sw.ElapsedMilliseconds);
+
+            var user = db.Query<User>(x => x.Id > 0).Take(1).FirstOrDefault();
+
+            var newList = new List<User>();
+
+            for (var i = 0;i < 100000;i++)
+            {
+                newList.Add(user);
+            }
+            sw.Reset();
+            sw.Start();
+            db.BulkInsert<User>("Users",newList);
+            sw.Stop();
+            Console.WriteLine("BulkInsert List 耗时：" + sw.ElapsedMilliseconds);
         }
 
         private static void Query(SQLiteDbContext db)

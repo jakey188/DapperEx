@@ -53,7 +53,7 @@ namespace Dapper
         /// <param name="destinationTableName"></param>
         /// <param name="list">List列明必须与数据表列一致,严格大小写区分</param>
         /// <param name="batchSize"></param>
-        public virtual int BulkInsert<T>(string destinationTableName,IList<T> list,int batchSize = 1000) where T : class
+        public virtual int BulkInsert<T>(string destinationTableName,IList<T> list,int batchSize = 1000)
         {
             var sql = GenerateBulkInsertSql<T>(destinationTableName,list);
             return _db.Connection.Execute(sql);
@@ -183,7 +183,5 @@ namespace Dapper
             return
                 $"INSERT INTO {tableName} ({string.Join(",", propertiesDictionary.Select(x => x.Key))}) VALUES {values}";
         }
-
-
     }
 }

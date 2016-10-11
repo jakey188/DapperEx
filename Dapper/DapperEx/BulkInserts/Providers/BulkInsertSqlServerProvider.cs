@@ -15,25 +15,39 @@ namespace Dapper
             _db = db;
         }
 
-        public override int BulkInsert(string destinationTableName,DataTable dataTable,int batchSize = 1000)
+        /// <summary>
+        /// 批量插入
+        /// </summary>
+        /// <param name="tableName">表名</param>
+        /// <param name="dataTable">插入的数据源</param>
+        /// <param name="batchSize"></param>
+        /// <returns></returns>
+        public override int BulkInsert(string tableName,DataTable dataTable,int batchSize = 1000)
         {
             SqlTransaction tran = _db.Transaction != null ? (SqlTransaction)_db.Transaction : null;
             using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy((SqlConnection)_db.Connection,SqlBulkCopyOptions.Default,tran))
             {
                 sqlBulkCopy.BatchSize = batchSize;
-                sqlBulkCopy.DestinationTableName = destinationTableName;
+                sqlBulkCopy.DestinationTableName = tableName;
                 sqlBulkCopy.WriteToServer(dataTable);
             }
             return 1;
         }
 
-        public override int BulkInsert(string destinationTableName,IDataReader dataReader,int batchSize = 1000)
+        /// <summary>
+        /// 批量插入
+        /// </summary>
+        /// <param name="tableName">表名</param>
+        /// <param name="dataReader">插入的数据源</param>
+        /// <param name="batchSize"></param>
+        /// <returns></returns>
+        public override int BulkInsert(string tableName,IDataReader dataReader,int batchSize = 1000)
         {
             SqlTransaction tran = _db.Transaction != null ? (SqlTransaction)_db.Transaction : null;
             using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy((SqlConnection)_db.Connection,SqlBulkCopyOptions.Default,tran))
             {
                 sqlBulkCopy.BatchSize = batchSize;
-                sqlBulkCopy.DestinationTableName = destinationTableName;
+                sqlBulkCopy.DestinationTableName = tableName;
                 sqlBulkCopy.WriteToServer(dataReader);
             }
             return 1;

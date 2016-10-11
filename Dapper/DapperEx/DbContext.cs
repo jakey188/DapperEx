@@ -8,7 +8,7 @@ using Dapper.Linq.Builder.Clauses;
 
 namespace Dapper
 {
-    public class DbContext :IDisposable
+    public abstract class DbContext :IDisposable
     {
         /// <summary>
         /// 数据库连接
@@ -19,10 +19,14 @@ namespace Dapper
         /// </summary>
         public IDbTransaction Transaction { get; set; }
 
-
+        /// <summary>
+        /// 数据库类型适配器
+        /// </summary>
         public Linq.ISqlAdapter Adapter { get; set; }
 
-
+        /// <summary>
+        /// 数据库类型
+        /// </summary>
         public EnmDbType DbType { get; set; }
 
         /// <summary>
@@ -55,7 +59,10 @@ namespace Dapper
             }
         }
 
-
+        /// <summary>
+        /// 设置数据库适配
+        /// </summary>
+        /// <param name="dbType"></param>
         public void SetAdapter(EnmDbType dbType)
         {
             DbType = dbType;
@@ -131,9 +138,10 @@ namespace Dapper
         }
 
         /// <summary>
-        /// 批量删除 
+        /// 批量删除
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <param name="expression">删除条件</param>
         /// <returns></returns>
         public virtual int Delete<T>(Expression<Func<T,bool>> expression) where T : class
         {
@@ -150,8 +158,8 @@ namespace Dapper
         /// 批量修改
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="whereExpression"></param>
-        /// <param name="updateExpression"></param>
+        /// <param name="whereExpression">修改条件</param>
+        /// <param name="updateExpression">修改字段</param>
         /// <returns></returns>
         public virtual int Update<T>(Expression<Func<T,bool>> whereExpression,Expression<Func<T,T>> updateExpression)
             where T : class
@@ -201,57 +209,65 @@ namespace Dapper
         /// <param name="param">参数</param>
         /// <param name="commandType">执行方式</param>
         /// <returns></returns>
-        public virtual int ExecuteSqlCommand(string sql,object param,CommandType? commandType = null)
+        public virtual int ExecuteSqlCommand(string sql, object param, CommandType? commandType = null)
         {
-            return Connection.Execute(sql: sql,param: param,transaction: Transaction,commandTimeout: null,
+            return Connection.Execute(sql: sql, param: param, transaction: Transaction, commandTimeout: null,
                 commandType: commandType);
         }
 
         /// <summary>
-        /// 查询纯SQL方法
+        /// 查询方法
         /// </summary>
         /// <param name="sql">sql查询语句</param>
         /// <param name="param">sql参数</param>
         /// <param name="commandType"></param>
         /// <returns></returns>
-        public virtual List<T> SqlQuery<T>(string sql,object param = null,CommandType? commandType = null)
+        public virtual List<T> SqlQuery<T>(string sql, object param = null, CommandType? commandType = null)
         {
-            return Connection.Query<T>(sql: sql,param: param,transaction: Transaction,buffered: true,
-                commandTimeout: null,commandType: commandType).AsList();
+            return Connection.Query<T>(sql: sql, param: param, transaction: Transaction, buffered: true,
+                commandTimeout: null, commandType: commandType).AsList();
         }
 
         /// <summary>
-        /// 查询纯SQL方法
+        /// 查询方法
         /// </summary>
         /// <param name="sql">sql查询语句</param>
         /// <param name="param">sql参数</param>
         /// <param name="commandType"></param>
         /// <returns></returns>
-        public virtual IEnumerable<dynamic> SqlQueryDynamic(string sql,object param = null,CommandType? commandType = null)
+        public virtual IEnumerable<dynamic> SqlQueryDynamic(string sql, object param = null,
+            CommandType? commandType = null)
         {
-            return Connection.Query(sql: sql,param: param,transaction: Transaction,buffered: true,commandTimeout: null,commandType: commandType);
+            return Connection.Query(sql: sql, param: param, transaction: Transaction, buffered: true,
+                commandTimeout: null, commandType: commandType);
         }
 
         /// <summary>
-        /// 查询纯SQL方法
+        /// 查询方法
         /// </summary>
-        /// <param name="sql">sql查询语句</param>
-        /// <param name="param">sql参数</param>
-        /// <param name="commandType"></param>
+        /// <param name="table">表名</param>
+        /// <param name="where">查询条件</param>
+        /// <param name="select">返回字段</param>
+        /// <param name="order">排序条件</param>
+        /// <param name="parametes">查询条件参数</param>
+        /// <param name="pageIndex">页码</param>
+        /// <param name="pageSize">页大小</param>
+        /// <param name="total">总数</param>
         /// <returns></returns>
-        public virtual List<T> SqlPageQuery<T>(string table,string where,string select,string order,object parametes,int pageIndex,int pageSize,out int total)
+        public virtual List<T> SqlPageQuery<T>(string table, string where, string select, string order, object parametes,
+            int pageIndex, int pageSize, out int total)
         {
             total = 0;
             if (pageIndex < 1)
                 pageIndex = 1;
 
-            var sql = Adapter.QueryStringPage(table,select,where,order,pageSize,pageIndex);
+            var sql = Adapter.QueryStringPage(table, select, where, order, pageSize, pageIndex);
 
-            var data = Connection.Query<T>(sql: sql,param: parametes,transaction: Transaction).AsList();
+            var data = Connection.Query<T>(sql: sql, param: parametes, transaction: Transaction).AsList();
 
             if (data != null && data.Count > 0 && pageSize > 0)
             {
-                total = Connection.ExecuteScalar<int>($"SELECT COUNT(*) FROM {table} {where}",parametes);
+                total = Connection.ExecuteScalar<int>($"SELECT COUNT(*) FROM {table} {where}", parametes);
             }
 
             return data;
