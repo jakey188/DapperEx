@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Dapper.SQLite;
 using System.Diagnostics;
 using System.Data;
+using Dapper.Demo.Entites;
 
 namespace Dapper.Demo
 {
@@ -89,6 +90,59 @@ namespace Dapper.Demo
 
             db.Query<User>(x => x.Id == 12).FirstOrDefault();
 
+        }
+
+        private static void aa()
+        {
+
+            using (var db = new SqlServerDbContext("ConnectionString"))
+            {
+
+                var user = new User
+                {
+                    Age = 1,
+                    CityId = 11,
+                    Gender = 1,
+                    Name = "dfaf",
+                    OpTime = DateTime.Now
+                };
+                db.Add<User>(user);//单条记录添加
+
+                var dataTable = new DataTable();//要插入的数据集：DataTable
+                db.BulkInsert("Users",dataTable);
+
+                var bulkInsertList = new List<User>();//要插入的数据集：List<T>
+                db.BulkInsert<User>("Users",bulkInsertList);
+
+                db.Delete<Products>(x => x.ProductId > 70);
+                db.Update<User>(x => x.Id == 10,x => new User { Name = "我是DapperEx" });
+                db.Query<Products>(x => x.CategoryId > 75).ToList();
+
+
+                db.Query<Products>(x => x.ProductId > 0).Where(x => x.CategoryId > 0).Where(x => x.ProductName == "22").ToList();
+
+                var aa = new List<int>() { 1,2 };//只支持List类型
+
+                db.Query<Products>(x => aa.Contains(x.ProductId));
+
+                db.Query<Products>(x => x.ProductName.Contains("a") && x.ProductName.StartsWith("n") && x.ProductName.EndsWith("aa") && string.IsNullOrEmpty(x.ProductName))
+                    .ToList();
+
+                db.Query<Products>().GroupBy(x => new { x.ProductId }).Select(x => x.ProductId).ToList();
+
+                db.Query<Products>().Take(10).Select(x => x.ProductId).ToList();
+                db.Query<Products>().Take(10).ToList();
+
+                db.Query<Products>().Select(x => x.ProductId).ToList();
+
+                db.Query<Products>().Select(x => new Products { ProductId = x.ProductId }).ToList();
+
+                db.Query<Products>().Select(x => new { x.ProductId }).ToList();
+
+                db.Query<Products>().Select(x => new { id = x.ProductId,name = x.ProductName }).ToList();
+
+                db.Query<Products>().Select(x => new newProducts { Id = x.ProductId,Name = x.ProductName }).ToList();
+            }
         }
     }
 }
