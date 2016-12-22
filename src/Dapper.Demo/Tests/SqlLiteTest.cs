@@ -15,10 +15,15 @@ namespace Dapper.Demo
         {
             using (var db = new SQLiteDbContext("SqlLiteName"))
             {
-                //Add(db);
-                //Query(db);
-                BulkInsert(db);
+                DeleteAll(db);
+                Add(db);
+                Query(db);
+                //BulkInsert(db);
             }
+        }
+
+        public static void DeleteAll(SQLiteDbContext db) {
+            db.DeleteAll<User>();
         }
 
         private static void Add(SQLiteDbContext db)
@@ -26,7 +31,7 @@ namespace Dapper.Demo
             var user = new User
             {
                 Age = 1,
-                Gender = 1,
+                Gender = EnmUserGender.女,
                 Name = "dfaf",
                 OpTime = DateTime.Now
             };
