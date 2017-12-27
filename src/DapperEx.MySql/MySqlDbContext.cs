@@ -8,7 +8,7 @@ namespace DapperEx.MySql
     {
         internal MySqlDbContext(IDbConnection connection)
         {
-            SetAdapter(EnmDbType.Sqlite);
+            SetAdapter(EnmDbType.MySql);
             CreateDbConnection(connection);
         }
 
@@ -18,7 +18,7 @@ namespace DapperEx.MySql
         /// <param name="connectionString">连接字符串名称</param>
         public MySqlDbContext(string connectionString = "")
         {
-            SetAdapter(EnmDbType.Sqlite);
+            SetAdapter(EnmDbType.MySql);
             CreateDbConnection(new MySqlConnection(connectionString));
         }
     }
