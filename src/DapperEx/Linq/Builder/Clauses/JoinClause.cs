@@ -17,7 +17,7 @@ namespace DapperEx.Linq.Builder.Clauses
             _builder = builder;
         }
 
-        public void Build<T1, TResult>(Expression<Func<T1,TResult,bool>> expression,JoinType joinType)
+        public void Build<T1, TResult>(Expression<Func<T1, TResult, bool>> expression, JoinType joinType)
         {
             var joinExpression = Helper.GetBinaryExpression(expression.Body);
 
@@ -46,9 +46,9 @@ namespace DapperEx.Linq.Builder.Clauses
 
             var joinString = string.Format(" {0} {1} ON {2} = {3}",
                                             joinTypeString,
-                                           _builder.Adapter.Table(joinTable.Name,joinTable.Alias),
-                                           _builder.Adapter.Field(originalMember.TableAliasName,originalMember.FieldName),
-                                           _builder.Adapter.Field(joinMember.TableAliasName,joinMember.FieldName));
+                                           _builder.Adapter.Table(joinTable.Name, joinTable.Alias),
+                                           _builder.Adapter.Field(originalMember.TableName, originalMember.TableAliasName, originalMember.FieldName),
+                                           _builder.Adapter.Field(joinMember.TableName, joinMember.TableAliasName, joinMember.FieldName));
 
             _builder.Table = _builder.Table + joinString;
         }

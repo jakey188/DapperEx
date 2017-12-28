@@ -31,6 +31,6 @@ namespace DapperEx.Linq.Types
         public string TableName { get; set; }
         public string TableAliasName { get; set; }
         public string FieldName { get; set; }
-        public string FiledAliasName { get; set; }
+        public string SelectFiledAliasName { get; set; }
     }
 }

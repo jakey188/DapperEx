@@ -67,7 +67,7 @@ namespace DapperEx.Linq.Builder
             Where = new StringBuilder();
             Parameters = new DynamicParameters();
             SelectField = new List<string> { "*" };
-            TableAliasName = table.Alias;
+            TableAliasName = isEnableAlias ? table.Alias : string.Empty;
             IsEnableAlias = isEnableAlias;
             Adapter = adapter;
             Table = isEnableAlias ? Adapter.Table(table.Name,table.Alias) : Adapter.Table(table.Name);
