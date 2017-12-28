@@ -44,10 +44,8 @@ namespace Dapper.Linq.Builder.Clauses
             if (node.Expression!=null && Helper.IsSpecificMemberExpression(node, node.Expression.Type,table.Columns))
             {
                 var propertyName = Helper.GetPropertyNameWithIdentifierFromExpression(node);
-
-                var column = string.Format("[{0}].[{1}]", (_builder.IsEnableAlias ? table.Alias : table.Name),propertyName);
-
-                ColumnName(column);
+                var columnName = _builder.Adapter.Field(_builder.Table, _builder.TableAliasName, propertyName);
+                ColumnName(columnName);
 
                 return node;
             }

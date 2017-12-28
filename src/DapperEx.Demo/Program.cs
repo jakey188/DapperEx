@@ -16,19 +16,10 @@ namespace Dapper.Demo
     {
         static void Main(string[] args)
         {
-            //var list = new List<Products>(); 
-
-            //using (var db = new SqlServerDbContext("Group_Set"))
-            //{
-            //    SqlServiceTest.Create(db);
-            //}
-            Test.Init();
-            //SqlLiteTest.Init();
+            SqlLiteTest.Init();
+            //MySqlTest.Init();
             Console.ReadKey();
         }
-
-        
-
     }
 
 }

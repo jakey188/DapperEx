@@ -27,7 +27,7 @@ namespace DapperEx.Linq.Builder.Visitors
                     {
                         var node = GetMemberInfo(memberExp);
                         if (!node.FieldName.Equals(nameArr[i]))
-                            node.FiledAliasName = nameArr[i];
+                            node.SelectFiledAliasName = nameArr[i];
                         list.Add(node);
                         i++;
                     }
@@ -41,7 +41,7 @@ namespace DapperEx.Linq.Builder.Visitors
                         var model = new MemberNode
                         {
                             FieldName = node.FieldName,
-                            FiledAliasName = item.Member.Name == node.FieldName ? "" : item.Member.Name,
+                            SelectFiledAliasName = item.Member.Name == node.FieldName ? "" : item.Member.Name,
                             TableName = node.TableName,
                             TableAliasName = node.TableAliasName
                         };

@@ -178,7 +178,7 @@ namespace DapperEx
             var builder = new SqlBuilder<T>(Adapter, false);
             var resolve = new WhereExpressionVisitor<T>();
             resolve.Evaluate(expression, builder);
-            string sql = $"DELETE {builder.Table} FROM {builder.Table} {builder.Where}";
+            string sql = $"DELETE FROM {builder.Table} {builder.Where}";
             return Connection.Execute(sql, builder.Parameters, Transaction);
         }
 
@@ -194,7 +194,7 @@ namespace DapperEx
         {
             if (whereExpression == null)
                 return 0;
-            var builder = new SqlBuilder<T>(Adapter, false);
+            var builder = new SqlBuilder<T>(Adapter,false);
             var resolve = new WhereExpressionVisitor<T>();
             resolve.Evaluate(whereExpression, builder);
 
@@ -219,13 +219,15 @@ namespace DapperEx
                     var lambda = Expression.Lambda(memberExpression, null);
                     value = lambda.Compile().DynamicInvoke();
                 }
-                set += $"[{name}]=@{name}";
+                var column = builder.Adapter.Field(builder.Table, builder.TableAliasName, name);
+
+                set += $"{column}=@{name}";
                 if (i < bindingCount)
                     set += ", ";
                 builder.Parameters.Add(name, value);
             }
-
-            string sql = $"UPDATE {builder.Table} SET {set} {builder.Where}";
+            var table = $"{(builder.IsEnableAlias ? builder.TableAliasName : builder.Table)}";
+            string sql = $"UPDATE {table} SET {set} {builder.Where}";
 
             return Connection.Execute(sql, builder.Parameters, Transaction);
         }
@@ -308,7 +310,7 @@ namespace DapperEx
             {
                 Transaction?.Dispose();
                 _dbConnetion.Close();
-                Debug.WriteLine("关闭" + _dbConnetion.State);
+                Debug.WriteLine("Connetion " + _dbConnetion.State);
                 _dbConnetion = null;
             }
         }

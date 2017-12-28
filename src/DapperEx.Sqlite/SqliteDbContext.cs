@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Data;
 
 namespace DapperEx.Sqlite
@@ -23,6 +24,7 @@ namespace DapperEx.Sqlite
 #if NET452
             //DbProviderFactory = System.Data.SQLite.SQLiteFactory.Instance;
             CreateDbConnection(new System.Data.SQLite.SQLiteConnection(connectionString));
+
 #endif
 
 #if NETSTANDARD2_0

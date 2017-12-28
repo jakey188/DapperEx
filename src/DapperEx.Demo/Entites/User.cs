@@ -18,9 +18,9 @@ namespace Dapper.Demo
         public DateTime? OpTime { get; set; }
     }
 
-    public enum EnmUserGender
+    public enum EnmUserGender : int
     {
-        男,
-        女
+        男 = 1,
+        女 = 2
     }
 }

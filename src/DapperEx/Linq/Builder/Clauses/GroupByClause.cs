@@ -20,7 +20,7 @@ namespace DapperEx.Linq.Builder.Clauses
             var memberList = new List<string>();
             resolve.VisitMember(expression).ForEach(x =>
             {
-                memberList.Add(_builder.Adapter.Field((_builder.IsEnableAlias ? x.TableAliasName : x.TableName),x.FieldName));
+                memberList.Add(_builder.Adapter.Field(x.TableName, x.TableAliasName, x.FieldName));
             });
             _builder.GroupBy = " GROUP BY " + string.Join(",",memberList);
         }
