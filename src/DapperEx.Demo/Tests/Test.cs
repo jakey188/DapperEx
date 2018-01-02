@@ -94,6 +94,15 @@ namespace DapperEx.Demo.Tests
             var a3 = db.SqlQueryDynamic(" select * from users ", null);
 
             var a4 = db.Query<User>(x => x.Id == 12).FirstOrDefault();
+
+            var a5 = db.Query<User>(x => x.Id > 1).OrderBy(x => x.Id).ThenByDescending(x => x.Age).ToList();
+            var total = 0;
+
+            var a6 = db.Query<User>(x => x.Id > 1).OrderBy(x => x.Id).ThenByDescending(x => x.Age).ToPageList(1, 5, out total);
+
+            var a7 = db.Query<User>(x => x.Id > 0).GroupBy(x => x.Age).Select(x => x.Id).ToList();
+
+            var a8 = db.Query<User>(x => x.Id > 0).Max(x => x.Id); ;
         }
     }
 }

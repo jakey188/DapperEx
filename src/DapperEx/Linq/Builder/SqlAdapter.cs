@@ -18,7 +18,7 @@ namespace DapperEx.Linq.Builder
 
         public string QueryString(int top, string select, string source, string conditions, string order, string grouping, string having)
         {
-            return $"SELECT {select} FROM {source} {conditions} {order} {(top == 0 ? "" : " LIMIT " + top + "")}";
+            return $"SELECT {select} FROM {source} {conditions} {order} {grouping} {(top == 0 ? "" : " LIMIT " + top + "")}";
         }
     }
     internal class MySqlAdapter : SqlAdapter, ISqlAdapter
@@ -30,7 +30,7 @@ namespace DapperEx.Linq.Builder
 
         public string QueryString(int top, string select, string source, string conditions, string order, string grouping, string having)
         {
-            return $"SELECT {select} FROM {source} {conditions} {order} {(top == 0 ? "" : " LIMIT " + top + "")}";
+            return $"SELECT {select} FROM {source} {conditions} {order} {grouping} {(top == 0 ? "" : " LIMIT " + top + "")}";
         }
 
         public override string Table(string tableName, string tableAliasName = "")
@@ -66,16 +66,7 @@ namespace DapperEx.Linq.Builder
 
         public string QueryString(int top, string select, string source, string conditions, string order, string grouping, string having)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Restart();
-            stopwatch.Start();
-
-            var sql = $"SELECT {(top == 0 ? "" : "TOP (" + top + ")")} {select} FROM {source} {conditions} {order} {grouping} {having}";
-
-            Trace.WriteLine($"SQL打印:{sql}");
-            stopwatch.Stop();
-
-            return sql;
+            return $"SELECT {(top == 0 ? "" : "TOP (" + top + ")")} {select} FROM {source} {conditions} {order} {grouping} {having}";
         }
 
     }
