@@ -8,6 +8,7 @@ namespace DapperEx.Linq
     {
         IQuery<TResult> Select<TResult>(Expression<Func<T,TResult>> selector);
         IQuery<T> Where(Expression<Func<T,bool>> predicate);
+        IQuery<T> Where(string predicate);
         IQuery<T> OrderBy(Expression<Func<T,object>> predicate);
         IQuery<T> OrderByDescending(Expression<Func<T,object>> predicate);
         IQuery<T> ThenBy(Expression<Func<T,object>> predicate);
