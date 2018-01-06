@@ -16,14 +16,14 @@ namespace DapperEx.Linq
         private readonly DapperDbContext _db;
         private readonly SqlBuilder<T> _builder;
 
-        public Query(DapperDbContext db,Expression<Func<T,bool>> expression=null)
+        public Query(DapperDbContext db, Expression<Func<T, bool>> expression = null)
         {
             _db = db;
             _builder = new SqlBuilder<T>(db.Adapter);
             this.Where(expression);
         }
 
-        public Query(SqlBuilder<T> builder,DapperDbContext db,Expression<Func<T,bool>> expression = null)
+        public Query(SqlBuilder<T> builder, DapperDbContext db, Expression<Func<T, bool>> expression = null)
         {
             _db = db;
             _builder = builder;
@@ -42,6 +42,18 @@ namespace DapperEx.Linq
             {
                 vistor.Evaluate(expression,_builder);
             }
+            return this;
+        }
+
+        /// <summary>
+        /// 条件筛选
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public IQuery<T> Where(string predicate)
+        {
+            var vistor = new WhereExpressionVisitor<T>();
+            vistor.Evaluate(null, _builder, predicate);
             return this;
         }
 
@@ -141,6 +153,7 @@ namespace DapperEx.Linq
         /// <returns></returns>
         public T First()
         {
+            _builder.Take = 1;
             var reval = this.ToList();
             return reval.First();
         }
@@ -152,6 +165,7 @@ namespace DapperEx.Linq
         /// <returns></returns>
         public T FirstOrDefault()
         {
+            _builder.Take = 1;
             var reval = this.ToList();
             if (reval == null || reval.Count == 0)
             {

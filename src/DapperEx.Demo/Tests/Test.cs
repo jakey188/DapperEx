@@ -87,6 +87,8 @@ namespace DapperEx.Demo.Tests
 
         private static void Query(DapperDbContext db)
         {
+            
+
             var a1 = db.Query<User>(x => x.Name == "张三").Select(x => new { title = x.Name }).ToList();
 
             var a2 = db.Query<User>(x => x.Id > 0).ToList();
@@ -102,7 +104,9 @@ namespace DapperEx.Demo.Tests
 
             var a7 = db.Query<User>(x => x.Id > 0).GroupBy(x => x.Age).Select(x => x.Id).ToList();
 
-            var a8 = db.Query<User>(x => x.Id > 0).Max(x => x.Id); ;
+            var a8 = db.Query<User>(x => x.Id > 0).Max(x => x.Id);
+
+            var a9 = db.Query<User>().Where("age=1").FirstOrDefault();
         }
     }
 }

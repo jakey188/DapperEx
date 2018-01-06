@@ -12,13 +12,15 @@ namespace Dapper.Linq.Builder.Clauses
         private bool _notOperater;
         private SqlBuilder<T> _builder;
 
-        public void Evaluate(Expression node,SqlBuilder<T> builder)
+        public void Evaluate(Expression node = null, SqlBuilder<T> builder = null, string predicate = "")
         {
             _builder = builder;
 
             _builder.Where.Append(string.IsNullOrEmpty(_builder.Where.ToString()) ? " WHERE " : " AND ");
-
-            base.Visit(node);
+            if (!string.IsNullOrEmpty(predicate))
+                _builder.Where.Append(predicate);
+            if (node != null)
+                base.Visit(node);
         }
 
         protected override Expression VisitUnary(UnaryExpression node)
