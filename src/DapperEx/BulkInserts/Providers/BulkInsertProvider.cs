@@ -21,9 +21,8 @@ namespace DapperEx.BulkInserts.Providers
         /// </summary>
         /// <param name="destinationTableName">要插入的表名称</param>
         /// <param name="dataTable">DataTable</param>
-        /// <param name="batchSize">每次插入的数量</param>
         /// <remarks>数据一致性,请开启事务</remarks>
-        public virtual int BulkInsert(string destinationTableName,DataTable dataTable,int batchSize = 1000)
+        public virtual int BulkInsert(string destinationTableName,DataTable dataTable)
         {
             var sql = GenerateBulkInsertSql(destinationTableName,dataTable);
             return _db.Connection.Execute(sql);
@@ -34,9 +33,8 @@ namespace DapperEx.BulkInserts.Providers
         /// </summary>
         /// <param name="destinationTableName">要插入的表名称</param>
         /// <param name="dataReader">IDataReader</param>
-        /// <param name="batchSize">每次插入的数量</param>
         /// <remarks>数据一致性,请开启事务</remarks>
-        public virtual int BulkInsert(string destinationTableName,IDataReader dataReader,int batchSize = 1000)
+        public virtual int BulkInsert(string destinationTableName,IDataReader dataReader)
         {
             var sql = GenerateBulkInsertSql(destinationTableName,dataReader);
             return _db.Connection.Execute(sql);
@@ -52,7 +50,7 @@ namespace DapperEx.BulkInserts.Providers
         public virtual int BulkInsert<T>(string destinationTableName,IList<T> list,int batchSize = 1000)
         {
             var sql = GenerateBulkInsertSql<T>(destinationTableName,list);
-            return _db.Connection.Execute(sql);
+            return _db.Connection.Execute(sql.ToString());
         }
 
         /// <summary>
@@ -128,20 +126,21 @@ namespace DapperEx.BulkInserts.Providers
         /// <param name="tableName">表名</param>
         /// <param name="list">IList</param>
         /// <returns></returns>
-        private string GenerateBulkInsertSql<T>(string tableName, IList<T> list)
+        public StringBuilder GenerateBulkInsertSql<T>(string tableName, IList<T> list)
         {
-            var type = typeof (T);
+            var type = typeof(T);
             var values = new StringBuilder();
+            var sql = new StringBuilder();
 
-            var properties = type.GetProperties();
-
+            var allProperties = type.GetPropertiesFromCache();
+            var keyProperties = allProperties.CustomPropertiesCache(type, "KeyAttribute").ToList();
+            var foreignKeyProperties = allProperties.CustomPropertiesCache(type, "ForeignKeyAttribute").ToList();
             var propertiesDictionary = new Dictionary<string, int>();
+            var insertProperties = allProperties.Except(keyProperties.Union(foreignKeyProperties)).ToArray();
 
-            foreach (var item in properties)
+            foreach (var item in insertProperties)
             {
-                var col = item.GetCustomAttributes(false).Where(attr => attr.GetType().Name == "KeyAttribute").SingleOrDefault() as dynamic;
-
-                if (col == null && item.Name.ToLower() != "id")
+                if (!foreignKeyProperties.Any(x => x == item) && !keyProperties.Any(x => x == item) && item.Name.ToLower() != "id")
                 {
                     var key = item.Name;
                     var value = 0;
@@ -149,35 +148,68 @@ namespace DapperEx.BulkInserts.Providers
                     {
                         value = 1;
                     }
-                    propertiesDictionary.Add(key,value);
+
+                    propertiesDictionary.Add(key, value);
                 }
             }
 
             for (var i = 0; i < list.Count; i++)
             {
                 var item = list[i];
-                for (var j = 0; j < properties.Count(); j++)
+                for (var j = 0; j < insertProperties.Count(); j++)
                 {
-                    var property = properties[j];
+                    var property = insertProperties[j];
                     if (j == 0)
                         values.Append("(");
                     if (!propertiesDictionary.ContainsKey(property.Name)) continue;
+
+                    var value = property.GetValue(item);
+
                     if (propertiesDictionary[property.Name] == 1)
                     {
-                        values.Append("'" + property.GetValue(item) + "'");
+                        if (property.PropertyType.IsEnum)
+                        {
+                            value = Convert.ChangeType(value, Enum.GetUnderlyingType(value.GetType()));
+                        }
+
+
+                        //Nullable.GetUnderlyingType(property.PropertyType);
+                        if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>) && value == null)
+                        {
+                            values.Append("null");
+                        }
+                        else
+                        {
+                            if (value == null)
+                                values.Append("'" + value + "'");
+                            else
+                                values.Append("'" + value.ToString().Replace("'", "") + "'");
+                        }
+                        //values.Append("'" + value==null ? value : value.ToString().Replace("'","")  + "'");
                     }
                     else
                     {
-                        values.Append(property.GetValue(item));
+                        if (property.PropertyType.FullName == (typeof(Boolean).FullName))
+                        {
+                            value = Convert.ToInt32(value);
+                        }
+                        if (property.PropertyType.IsEnum)
+                        {
+                            value = Convert.ChangeType(value, Enum.GetUnderlyingType(value.GetType()));
+                        }
+                        if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>) && value == null)
+                            values.Append("null");
+                        else
+                            values.Append(value);
                     }
-                    values.Append(j < properties.Count() - 1 ? "," : ")");
+                    values.Append(j < insertProperties.Count() - 1 ? "," : ")");
                 }
 
-                if (i < list.Count-1)
+                if (i < list.Count - 1)
                     values.Append(",");
             }
-            return
-                $"INSERT INTO {tableName} ({string.Join(",", propertiesDictionary.Select(x => x.Key))}) VALUES {values}";
+            sql.Append($"INSERT INTO {tableName} ({string.Join(",", propertiesDictionary.Select(x => x.Key))}) VALUES {values};");
+            return sql;
         }
     }
 }

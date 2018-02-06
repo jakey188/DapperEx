@@ -14,7 +14,7 @@ namespace DapperEx.Linq.Helpers
 
         internal static bool IsSpecificMemberExpression(Expression exp, Type declaringType, Dictionary<string, string> propertyList)
         {
-            if (propertyList == null) return false;
+            if (propertyList == null || ( propertyList!=null && propertyList.Count==0)) return false;
             return ((exp is MemberExpression) &&
                     (((MemberExpression)exp).Member.DeclaringType == declaringType) &&
                     propertyList[(((MemberExpression)exp).Member.Name)] != null);

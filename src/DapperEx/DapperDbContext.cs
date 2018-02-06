@@ -299,6 +299,10 @@ namespace DapperEx
             {
                 total = Connection.ExecuteScalar<int>($"SELECT COUNT(*) FROM {table} {where}", parametes);
             }
+            else
+            {
+                total = data.Count;
+            }
 
             return data;
         }

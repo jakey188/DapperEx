@@ -4,7 +4,10 @@ using DapperEx.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
+using DapperEx.Sqlite.BulkInserts;
+using System.Data;
 
 namespace DapperEx.Demo.Tests
 {
@@ -20,39 +23,7 @@ namespace DapperEx.Demo.Tests
             Query(db);
         }
 
-        //private static void BulkInsert(DapperDbContext db)
-        //{
-        //    Stopwatch sw = new Stopwatch();
-        //    var user = db.Query<User>(x => x.Id > 0).Take(1).FirstOrDefault();
-        //    var dataTable = db.SqlQueryDataTable("select Name,Gender,Age,OpTime from Users LIMIT 1");
-
-        //    DataTable dtNew = dataTable.Copy();
-        //    dtNew.Clear();  //清楚数据
-
-        //    for (var i = 0;i < 100000;i++)
-        //    {
-        //        dtNew.Rows.Add(dataTable.Rows[0].ItemArray);  //添加数据行
-        //    }
-        //    sw.Reset();
-        //    sw.Start();
-        //    db.BulkInsert("Users",dtNew);
-        //    sw.Stop();
-        //    Console.WriteLine("BulkInsert DataTable 耗时：" + sw.ElapsedMilliseconds);
-
-        //    //var user = db.Query<User>(x => x.Id > 0).Take(1).FirstOrDefault();
-
-        //    var newList = new List<User>();
-
-        //    for (var i = 0;i < 100000;i++)
-        //    {
-        //        newList.Add(user);
-        //    }
-        //    sw.Reset();
-        //    sw.Start();
-        //    db.BulkInsert<User>("Users",newList);
-        //    sw.Stop();
-        //    Console.WriteLine("BulkInsert List 耗时：" + sw.ElapsedMilliseconds);
-        //}
+        
 
         private static void Add(DapperDbContext db)
         {
@@ -61,7 +32,8 @@ namespace DapperEx.Demo.Tests
                 Age = 1,
                 Gender = EnmUserGender.女,
                 Name = "张三",
-                OpTime = DateTime.Now
+                OpTime = DateTime.Now,
+                Gender1 = true
             };
             db.Add<User>(user);
         }
@@ -107,6 +79,11 @@ namespace DapperEx.Demo.Tests
             var a8 = db.Query<User>(x => x.Id > 0).Max(x => x.Id);
 
             var a9 = db.Query<User>().Where("age=1").FirstOrDefault();
+            var id = 10;
+            var a10 = db.Query<User>(x=>x.Id==id).FirstOrDefault();
+
+            var g = true;
+            var a11 = db.Query<User>(x => x.Gender1 && x.Gender1==g).FirstOrDefault();
         }
     }
 }

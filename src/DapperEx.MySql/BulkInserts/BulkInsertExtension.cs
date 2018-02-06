@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using DapperEx.MySql.BulkInserts.Providers;
 
@@ -17,6 +18,19 @@ namespace DapperEx.MySql.BulkInserts
         {
             var provider = new BulkInsertmmMySqlProvider(context);
             var result = provider.BulkInsert(tableName, dataReader);
+            return result;
+        }
+
+        /// <summary>
+        /// 批量插入
+        /// </summary>
+        /// <param name="context">当前DbContext</param>
+        /// <param name="tableName">要插入的表名称</param>
+        /// <param name="dataTable">DataTable</param>
+        public static int BulkInsert(this MySqlDbContext context, string tableName, DataTable dataTable)
+        {
+            var provider = new BulkInsertmmMySqlProvider(context);
+            var result = provider.BulkInsert(tableName, dataTable);
             return result;
         }
 
