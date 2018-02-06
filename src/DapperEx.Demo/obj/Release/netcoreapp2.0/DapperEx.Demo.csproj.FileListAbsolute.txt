@@ -1,0 +1,17 @@
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\bin\Release\netcoreapp2.0\DapperEx.Demo.deps.json
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\bin\Release\netcoreapp2.0\DapperEx.Demo.runtimeconfig.json
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\bin\Release\netcoreapp2.0\DapperEx.Demo.runtimeconfig.dev.json
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\bin\Release\netcoreapp2.0\DapperEx.Demo.dll
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\bin\Release\netcoreapp2.0\DapperEx.Demo.pdb
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\bin\Release\netcoreapp2.0\DapperEx.dll
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\bin\Release\netcoreapp2.0\DapperEx.MySql.dll
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\bin\Release\netcoreapp2.0\DapperEx.Sqlite.dll
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\bin\Release\netcoreapp2.0\DapperEx.MySql.pdb
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\bin\Release\netcoreapp2.0\DapperEx.Sqlite.pdb
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\bin\Release\netcoreapp2.0\DapperEx.pdb
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\obj\Release\netcoreapp2.0\DapperEx.Demo.csprojResolveAssemblyReference.cache
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\obj\Release\netcoreapp2.0\DapperEx.Demo.csproj.CoreCompileInputs.cache
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\obj\Release\netcoreapp2.0\DapperEx.Demo.AssemblyInfoInputs.cache
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\obj\Release\netcoreapp2.0\DapperEx.Demo.AssemblyInfo.cs
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\obj\Release\netcoreapp2.0\DapperEx.Demo.dll
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\obj\Release\netcoreapp2.0\DapperEx.Demo.pdb

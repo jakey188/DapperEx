@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>DapperEx.Sqlite</id>
+    <version>2.0.0</version>
+    <authors>jakey188</authors>
+    <owners>jakey188</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETFramework4.5.2">
+        <dependency id="DapperEx" version="2.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Data.SQLite" version="1.0.106" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="DapperEx" version="2.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Data.SQLite" version="2.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\net452\DapperEx.Sqlite.dll" target="lib\net452\DapperEx.Sqlite.dll" />
+    <file src="E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\netstandard2.0\DapperEx.Sqlite.dll" target="lib\netstandard2.0\DapperEx.Sqlite.dll" />
+  </files>
+</package>

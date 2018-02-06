@@ -1,0 +1,15 @@
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\net452\DapperEx.Sqlite.dll
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\net452\DapperEx.Sqlite.pdb
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\net452\EntityFramework.SqlServer.dll
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\net452\EntityFramework.dll
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\net452\System.Data.SQLite.dll
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\net452\System.Data.SQLite.EF6.dll
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\net452\System.Data.SQLite.Linq.dll
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\net452\DapperEx.dll
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\net452\DapperEx.pdb
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\net452\DapperEx.Sqlite.csproj.CoreCompileInputs.cache
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\net452\DapperEx.Sqlite.AssemblyInfoInputs.cache
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\net452\DapperEx.Sqlite.AssemblyInfo.cs
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\net452\DapperEx.Sqlite.dll
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\net452\DapperEx.Sqlite.pdb
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\net452\DapperEx.Sqlite.csprojResolveAssemblyReference.cache

@@ -1,0 +1,9 @@
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\bin\Release\netstandard2.0\DapperEx.deps.json
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\bin\Release\netstandard2.0\DapperEx.dll
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\bin\Release\netstandard2.0\DapperEx.pdb
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Release\netstandard2.0\DapperEx.csproj.CoreCompileInputs.cache
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Release\netstandard2.0\DapperEx.AssemblyInfoInputs.cache
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Release\netstandard2.0\DapperEx.AssemblyInfo.cs
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Release\netstandard2.0\DapperEx.dll
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Release\netstandard2.0\DapperEx.pdb
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Release\netstandard2.0\DapperEx.csprojResolveAssemblyReference.cache
