@@ -16,8 +16,8 @@ namespace Dapper.Demo
     {
         static void Main(string[] args)
         {
-            SqlLiteTest.Init();
-            //MySqlTest.Init();
+            //SqlLiteTest.Init();
+            MySqlTest.Init();
             Console.ReadKey();
         }
     }

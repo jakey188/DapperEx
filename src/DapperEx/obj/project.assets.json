@@ -67,7 +67,7 @@
           }
         }
       },
-      "NETStandard.Library/2.0.0": {
+      "NETStandard.Library/2.0.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0"
@@ -659,10 +659,10 @@
         "version.txt"
       ]
     },
-    "NETStandard.Library/2.0.0": {
-      "sha512": "7jnbRU+L08FXKMxqUflxEXtVymWvNOrS8yHgu9s6EM8Anr6T/wIX4nZ08j/u3Asz+tCufp3YVwFSEvFTPYmBPA==",
+    "NETStandard.Library/2.0.1": {
+      "sha512": "oA6nwv9MhEKYvLpjZ0ggSpb1g4CQViDVQjLUcDWg598jtvJbpfeP2reqwI1GLW2TbxC/Ml7xL6BBR1HmKPXlTg==",
       "type": "package",
-      "path": "netstandard.library/2.0.0",
+      "path": "netstandard.library/2.0.1",
       "files": [
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
@@ -783,7 +783,7 @@
         "build/netstandard2.0/ref/netstandard.dll",
         "build/netstandard2.0/ref/netstandard.xml",
         "lib/netstandard1.0/_._",
-        "netstandard.library.2.0.0.nupkg.sha512",
+        "netstandard.library.2.0.1.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
     },
@@ -2637,7 +2637,7 @@
     ".NETFramework,Version=v4.5.2": [],
     ".NETStandard,Version=v2.0": [
       "Microsoft.CSharp >= 4.3.0",
-      "NETStandard.Library >= 2.0.0",
+      "NETStandard.Library >= 2.0.1",
       "System.Data.SqlClient >= 4.4.0",
       "System.Reflection.Emit >= 4.3.0",
       "System.Reflection.Emit.Lightweight >= 4.3.0",
@@ -2649,10 +2649,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "2.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
+    "version": "2.0.2",
     "restore": {
       "projectUniqueName": "E:\\项目\\源码\\MyGithub\\DapperEx-2.0\\src\\DapperEx\\DapperEx.csproj",
       "projectName": "DapperEx",
@@ -2675,7 +2672,7 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Users\\Administrator\\.dotnet\\NuGetFallbackFolder": {},
-        "http://10.10.17.70:81/nuget": {},
+        "http://10.10.16.4:81/nuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2703,7 +2700,7 @@
           "NETStandard.Library": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[2.0.0, )",
+            "version": "[2.0.1, )",
             "autoReferenced": true
           },
           "System.Data.SqlClient": {

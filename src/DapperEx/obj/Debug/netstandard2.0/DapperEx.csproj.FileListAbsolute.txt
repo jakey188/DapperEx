@@ -6,4 +6,4 @@ E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\netstandard2.0\Dap
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\netstandard2.0\DapperEx.AssemblyInfo.cs
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\netstandard2.0\DapperEx.dll
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\netstandard2.0\DapperEx.pdb
-E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\netstandard2.0\DapperEx.csprojResolveAssemblyReference.cache
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\netstandard2.0\DapperEx.csprojAssemblyReference.cache

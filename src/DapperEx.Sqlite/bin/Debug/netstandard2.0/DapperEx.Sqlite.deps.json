@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v2.0/",
-    "signature": "9d22f03f062d4135d09fe3c8d7df7d3963499bce"
+    "signature": "c81696280c8430dbf21ea84ef34e17e442e86ba4"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,9 +9,9 @@
     ".NETStandard,Version=v2.0/": {
       "DapperEx.Sqlite/2.0.0": {
         "dependencies": {
-          "DapperEx": "2.0.0",
+          "DapperEx": "2.0.2",
           "Microsoft.Data.Sqlite": "2.0.0",
-          "NETStandard.Library": "2.0.0"
+          "NETStandard.Library": "2.0.1"
         },
         "runtime": {
           "DapperEx.Sqlite.dll": {}
@@ -65,7 +65,7 @@
           "lib/netstandard2.0/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "NETStandard.Library/2.0.0": {
+      "NETStandard.Library/2.0.1": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0"
         }
@@ -82,7 +82,7 @@
       "runtime.win-x86.runtime.native.System.Data.SqlClient.sni/4.4.0": {},
       "SQLitePCLRaw.bundle_green/1.1.7": {
         "dependencies": {
-          "NETStandard.Library": "2.0.0",
+          "NETStandard.Library": "2.0.1",
           "SQLitePCLRaw.core": "1.1.7"
         },
         "runtime": {
@@ -92,7 +92,7 @@
       },
       "SQLitePCLRaw.core/1.1.7": {
         "dependencies": {
-          "NETStandard.Library": "2.0.0"
+          "NETStandard.Library": "2.0.1"
         },
         "runtime": {
           "lib/netstandard1.1/SQLitePCLRaw.core.dll": {}
@@ -372,7 +372,7 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "DapperEx/2.0.0": {
+      "DapperEx/2.0.2": {
         "dependencies": {
           "Microsoft.CSharp": "4.3.0",
           "System.Data.SqlClient": "4.4.0",
@@ -434,12 +434,12 @@
       "path": "microsoft.win32.registry/4.4.0",
       "hashPath": "microsoft.win32.registry.4.4.0.nupkg.sha512"
     },
-    "NETStandard.Library/2.0.0": {
+    "NETStandard.Library/2.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-7jnbRU+L08FXKMxqUflxEXtVymWvNOrS8yHgu9s6EM8Anr6T/wIX4nZ08j/u3Asz+tCufp3YVwFSEvFTPYmBPA==",
-      "path": "netstandard.library/2.0.0",
-      "hashPath": "netstandard.library.2.0.0.nupkg.sha512"
+      "sha512": "sha512-oA6nwv9MhEKYvLpjZ0ggSpb1g4CQViDVQjLUcDWg598jtvJbpfeP2reqwI1GLW2TbxC/Ml7xL6BBR1HmKPXlTg==",
+      "path": "netstandard.library/2.0.1",
+      "hashPath": "netstandard.library.2.0.1.nupkg.sha512"
     },
     "runtime.native.System.Data.SqlClient.sni/4.4.0": {
       "type": "package",
@@ -686,7 +686,7 @@
       "path": "system.threading.tasks/4.3.0",
       "hashPath": "system.threading.tasks.4.3.0.nupkg.sha512"
     },
-    "DapperEx/2.0.0": {
+    "DapperEx/2.0.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

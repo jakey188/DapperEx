@@ -242,6 +242,7 @@ namespace DapperEx.Linq.Helpers
         internal static bool IsVariable(Expression expr)
         {
             return (expr is MemberExpression) && (((MemberExpression)expr).Expression is ConstantExpression);
+            //return ((MemberExpression)expr).Expression is ConstantExpression;
         }
 
 

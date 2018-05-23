@@ -31,7 +31,7 @@ namespace DapperEx
         }
 
         /// <summary>
-        /// 数据库事物对象
+        /// 数据库事物对象(当外部传入IDbTransaction时,不能调用BeginTransaction)
         /// </summary>
         public IDbTransaction Transaction { get; set; }
 
@@ -52,36 +52,6 @@ namespace DapperEx
         public void CreateDbConnection(IDbConnection connection)
         {
             _dbConnetion = connection;
-        }
-
-        /// <summary>
-        /// 开始事务操作
-        /// </summary>
-        public void BeginTransaction()
-        {
-            Transaction = Connection.BeginTransaction();
-        }
-
-        /// <summary>
-        /// 提交数据库事务
-        /// </summary>
-        public void Commit()
-        {
-            if (Transaction != null)
-            {
-                Transaction.Commit();
-            }
-        }
-
-        /// <summary>
-        /// 数据库事务回滚
-        /// </summary>
-        public void Rollback()
-        {
-            if (Transaction != null)
-            {
-                Transaction.Rollback();
-            }
         }
 
         /// <summary>
@@ -194,7 +164,7 @@ namespace DapperEx
         {
             if (whereExpression == null)
                 return 0;
-            var builder = new SqlBuilder<T>(Adapter,false);
+            var builder = new SqlBuilder<T>(Adapter, false);
             var resolve = new WhereExpressionVisitor<T>();
             resolve.Evaluate(whereExpression, builder);
 

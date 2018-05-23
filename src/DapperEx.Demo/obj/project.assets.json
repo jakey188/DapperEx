@@ -1051,7 +1051,7 @@
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
       },
-      "DapperEx/2.0.0": {
+      "DapperEx/2.0.2": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
@@ -1068,11 +1068,11 @@
           "bin/placeholder/DapperEx.dll": {}
         }
       },
-      "DapperEx.MySql/2.0.0": {
+      "DapperEx.MySql/2.0.2": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "DapperEx": "2.0.0",
+          "DapperEx": "2.0.2",
           "MySql.Data": "6.10.5"
         },
         "compile": {
@@ -1086,7 +1086,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "DapperEx": "2.0.0",
+          "DapperEx": "2.0.2",
           "Microsoft.Data.SQLite": "2.0.0"
         },
         "compile": {
@@ -3894,12 +3894,12 @@
         "system.threading.tasks.nuspec"
       ]
     },
-    "DapperEx/2.0.0": {
+    "DapperEx/2.0.2": {
       "type": "project",
       "path": "../DapperEx/DapperEx.csproj",
       "msbuildProject": "../DapperEx/DapperEx.csproj"
     },
-    "DapperEx.MySql/2.0.0": {
+    "DapperEx.MySql/2.0.2": {
       "type": "project",
       "path": "../DapperEx.MySql/DapperEx.MySql.csproj",
       "msbuildProject": "../DapperEx.MySql/DapperEx.MySql.csproj"
@@ -3912,8 +3912,8 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
-      "DapperEx >= 2.0.0",
-      "DapperEx.MySql >= 2.0.0",
+      "DapperEx >= 2.0.2",
+      "DapperEx.MySql >= 2.0.2",
       "DapperEx.Sqlite >= 2.0.0",
       "Microsoft.EntityFrameworkCore.Sqlite >= 2.0.1",
       "Microsoft.NETCore.App >= 2.0.0"
@@ -3925,9 +3925,6 @@
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
       "projectUniqueName": "E:\\项目\\源码\\MyGithub\\DapperEx-2.0\\src\\DapperEx.Demo\\DapperEx.Demo.csproj",
       "projectName": "DapperEx.Demo",
@@ -3948,7 +3945,7 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Users\\Administrator\\.dotnet\\NuGetFallbackFolder": {},
-        "http://10.10.17.70:81/nuget": {},
+        "http://10.10.16.4:81/nuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

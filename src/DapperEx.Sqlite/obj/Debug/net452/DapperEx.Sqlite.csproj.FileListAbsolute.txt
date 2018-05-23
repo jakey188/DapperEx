@@ -12,4 +12,5 @@ E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\net452\Dapp
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\net452\DapperEx.Sqlite.AssemblyInfo.cs
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\net452\DapperEx.Sqlite.dll
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\net452\DapperEx.Sqlite.pdb
-E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\net452\DapperEx.Sqlite.csprojResolveAssemblyReference.cache
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\net452\DapperEx.Sqlite.csprojAssemblyReference.cache
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\net452\DapperEx.Sqlite.csproj.CopyComplete

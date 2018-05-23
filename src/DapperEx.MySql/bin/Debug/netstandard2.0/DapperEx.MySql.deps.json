@@ -1,17 +1,17 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v2.0/",
-    "signature": "5788dbc22a9e2f9e75ec29f59dfe15425563a641"
+    "signature": "5442bd45e1cdc2c458b852f60fe9d7eafc039c29"
   },
   "compilationOptions": {},
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "DapperEx.MySql/2.0.0": {
+      "DapperEx.MySql/2.0.2": {
         "dependencies": {
-          "DapperEx": "2.0.0",
+          "DapperEx": "2.0.2",
           "MySql.Data": "6.10.5",
-          "NETStandard.Library": "2.0.0"
+          "NETStandard.Library": "2.0.1"
         },
         "runtime": {
           "DapperEx.MySql.dll": {}
@@ -61,7 +61,7 @@
           "lib/netstandard2.0/MySql.Data.dll": {}
         }
       },
-      "NETStandard.Library/2.0.0": {
+      "NETStandard.Library/2.0.1": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0"
         }
@@ -371,7 +371,7 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "DapperEx/2.0.0": {
+      "DapperEx/2.0.2": {
         "dependencies": {
           "Microsoft.CSharp": "4.3.0",
           "System.Data.SqlClient": "4.4.0",
@@ -386,7 +386,7 @@
     }
   },
   "libraries": {
-    "DapperEx.MySql/2.0.0": {
+    "DapperEx.MySql/2.0.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -426,12 +426,12 @@
       "path": "mysql.data/6.10.5",
       "hashPath": "mysql.data.6.10.5.nupkg.sha512"
     },
-    "NETStandard.Library/2.0.0": {
+    "NETStandard.Library/2.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-7jnbRU+L08FXKMxqUflxEXtVymWvNOrS8yHgu9s6EM8Anr6T/wIX4nZ08j/u3Asz+tCufp3YVwFSEvFTPYmBPA==",
-      "path": "netstandard.library/2.0.0",
-      "hashPath": "netstandard.library.2.0.0.nupkg.sha512"
+      "sha512": "sha512-oA6nwv9MhEKYvLpjZ0ggSpb1g4CQViDVQjLUcDWg598jtvJbpfeP2reqwI1GLW2TbxC/Ml7xL6BBR1HmKPXlTg==",
+      "path": "netstandard.library/2.0.1",
+      "hashPath": "netstandard.library.2.0.1.nupkg.sha512"
     },
     "runtime.native.System.Data.SqlClient.sni/4.4.0": {
       "type": "package",
@@ -685,7 +685,7 @@
       "path": "system.threading.tasks/4.3.0",
       "hashPath": "system.threading.tasks.4.3.0.nupkg.sha512"
     },
-    "DapperEx/2.0.0": {
+    "DapperEx/2.0.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

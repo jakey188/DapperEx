@@ -3,9 +3,10 @@ E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\bin\Debug\netstandard2
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\bin\Debug\netstandard2.0\DapperEx.MySql.pdb
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\bin\Debug\netstandard2.0\DapperEx.dll
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\bin\Debug\netstandard2.0\DapperEx.pdb
-E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\netstandard2.0\DapperEx.MySql.csprojResolveAssemblyReference.cache
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\netstandard2.0\DapperEx.MySql.csproj.CoreCompileInputs.cache
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\netstandard2.0\DapperEx.MySql.AssemblyInfoInputs.cache
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\netstandard2.0\DapperEx.MySql.AssemblyInfo.cs
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\netstandard2.0\DapperEx.MySql.dll
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\netstandard2.0\DapperEx.MySql.pdb
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\netstandard2.0\DapperEx.MySql.csprojAssemblyReference.cache
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\netstandard2.0\DapperEx.MySql.csproj.CopyComplete

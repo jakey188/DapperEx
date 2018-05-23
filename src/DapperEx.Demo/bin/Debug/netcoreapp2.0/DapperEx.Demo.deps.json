@@ -8,8 +8,8 @@
     ".NETCoreApp,Version=v2.0": {
       "DapperEx.Demo/1.0.0": {
         "dependencies": {
-          "DapperEx": "2.0.0",
-          "DapperEx.MySql": "2.0.0",
+          "DapperEx": "2.0.2",
+          "DapperEx.MySql": "2.0.2",
           "DapperEx.Sqlite": "2.0.0",
           "Microsoft.EntityFrameworkCore.Sqlite": "2.0.1"
         },
@@ -536,7 +536,7 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "DapperEx/2.0.0": {
+      "DapperEx/2.0.2": {
         "dependencies": {
           "Microsoft.CSharp": "4.4.0",
           "System.Data.SqlClient": "4.4.0",
@@ -548,9 +548,9 @@
           "DapperEx.dll": {}
         }
       },
-      "DapperEx.MySql/2.0.0": {
+      "DapperEx.MySql/2.0.2": {
         "dependencies": {
-          "DapperEx": "2.0.0",
+          "DapperEx": "2.0.2",
           "MySql.Data": "6.10.5"
         },
         "runtime": {
@@ -559,7 +559,7 @@
       },
       "DapperEx.Sqlite/2.0.0": {
         "dependencies": {
-          "DapperEx": "2.0.0",
+          "DapperEx": "2.0.2",
           "Microsoft.Data.Sqlite": "2.0.0"
         },
         "runtime": {
@@ -1015,12 +1015,12 @@
       "path": "system.threading.tasks/4.3.0",
       "hashPath": "system.threading.tasks.4.3.0.nupkg.sha512"
     },
-    "DapperEx/2.0.0": {
+    "DapperEx/2.0.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "DapperEx.MySql/2.0.0": {
+    "DapperEx.MySql/2.0.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

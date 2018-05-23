@@ -1,4 +1,3 @@
-E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\obj\Debug\netcoreapp2.0\DapperEx.Demo.csprojResolveAssemblyReference.cache
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\obj\Debug\netcoreapp2.0\DapperEx.Demo.csproj.CoreCompileInputs.cache
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\obj\Debug\netcoreapp2.0\DapperEx.Demo.AssemblyInfoInputs.cache
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\obj\Debug\netcoreapp2.0\DapperEx.Demo.AssemblyInfo.cs
@@ -15,3 +14,5 @@ E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\bin\Debug\netcoreapp2.0
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\bin\Debug\netcoreapp2.0\DapperEx.pdb
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\obj\Debug\netcoreapp2.0\DapperEx.Demo.dll
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\obj\Debug\netcoreapp2.0\DapperEx.Demo.pdb
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\obj\Debug\netcoreapp2.0\DapperEx.Demo.csprojAssemblyReference.cache
+E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Demo\obj\Debug\netcoreapp2.0\DapperEx.Demo.csproj.CopyComplete

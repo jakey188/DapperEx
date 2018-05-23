@@ -23,7 +23,8 @@ namespace Dapper.Demo
         {
             using (var db = new SqliteDbContext(conString))
             {
-                db.DeleteAll<User>();
+                
+                //db.DeleteAll<User>();
                 var user = new User
                 {
                     Age = 1,
@@ -32,8 +33,8 @@ namespace Dapper.Demo
                     OpTime = DateTime.Now,
                     Gender1 = false
                 };
-                db.Add<User>(user);
-                BulkInsert(db);
+                //db.Add<User>(user);
+                //BulkInsert(db);
                 Test.Init(db);
             }
         }
