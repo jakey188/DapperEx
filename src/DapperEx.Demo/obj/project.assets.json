@@ -1072,7 +1072,6 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "DapperEx": "2.0.2",
           "MySql.Data": "6.10.5"
         },
         "compile": {

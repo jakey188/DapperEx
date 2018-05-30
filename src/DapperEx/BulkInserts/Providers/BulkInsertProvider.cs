@@ -25,7 +25,7 @@ namespace DapperEx.BulkInserts.Providers
         public virtual int BulkInsert(string destinationTableName,DataTable dataTable)
         {
             var sql = GenerateBulkInsertSql(destinationTableName,dataTable);
-            return _db.Connection.Execute(sql);
+            return _db.Connection.Execute(sql, null, _db.Transaction);
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace DapperEx.BulkInserts.Providers
         public virtual int BulkInsert(string destinationTableName,IDataReader dataReader)
         {
             var sql = GenerateBulkInsertSql(destinationTableName,dataReader);
-            return _db.Connection.Execute(sql);
+            return _db.Connection.Execute(sql, null, _db.Transaction);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace DapperEx.BulkInserts.Providers
         public virtual int BulkInsert<T>(string destinationTableName,IList<T> list,int batchSize = 1000)
         {
             var sql = GenerateBulkInsertSql<T>(destinationTableName,list);
-            return _db.Connection.Execute(sql.ToString());
+            return _db.Connection.Execute(sql.ToString(), null, _db.Transaction);
         }
 
         /// <summary>
