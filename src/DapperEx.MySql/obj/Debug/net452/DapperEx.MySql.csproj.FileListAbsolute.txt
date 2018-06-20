@@ -10,3 +10,15 @@ E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\net452\Dappe
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\net452\DapperEx.MySql.pdb
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\net452\DapperEx.MySql.csprojAssemblyReference.cache
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\net452\DapperEx.MySql.csproj.CopyComplete
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\net452\DapperEx.MySql.csprojAssemblyReference.cache
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\net452\DapperEx.MySql.csproj.CoreCompileInputs.cache
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\net452\DapperEx.MySql.AssemblyInfoInputs.cache
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\net452\DapperEx.MySql.AssemblyInfo.cs
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\net452\DapperEx.MySql.dll
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\net452\DapperEx.MySql.pdb
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\bin\Debug\net452\DapperEx.MySql.dll
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\bin\Debug\net452\DapperEx.MySql.pdb
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\bin\Debug\net452\MySql.Data.dll
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\bin\Debug\net452\DapperEx.dll
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\bin\Debug\net452\DapperEx.pdb
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.MySql\obj\Debug\net452\DapperEx.MySql.csproj.CopyComplete

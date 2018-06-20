@@ -250,7 +250,7 @@
           }
         }
       },
-      "NETStandard.Library/2.0.1": {
+      "NETStandard.Library/2.0.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0"
@@ -980,14 +980,13 @@
         "mysql.data.nuspec"
       ]
     },
-    "NETStandard.Library/2.0.1": {
-      "sha512": "oA6nwv9MhEKYvLpjZ0ggSpb1g4CQViDVQjLUcDWg598jtvJbpfeP2reqwI1GLW2TbxC/Ml7xL6BBR1HmKPXlTg==",
+    "NETStandard.Library/2.0.3": {
+      "sha512": "st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
       "type": "package",
-      "path": "netstandard.library/2.0.1",
+      "path": "netstandard.library/2.0.3",
       "files": [
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
-        "build/NETStandard.Library.targets",
         "build/netstandard2.0/NETStandard.Library.targets",
         "build/netstandard2.0/ref/Microsoft.Win32.Primitives.dll",
         "build/netstandard2.0/ref/System.AppContext.dll",
@@ -1104,7 +1103,7 @@
         "build/netstandard2.0/ref/netstandard.dll",
         "build/netstandard2.0/ref/netstandard.xml",
         "lib/netstandard1.0/_._",
-        "netstandard.library.2.0.1.nupkg.sha512",
+        "netstandard.library.2.0.3.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
     },
@@ -2745,7 +2744,7 @@
       ]
     },
     "System.Security.Principal.Windows/4.4.0": {
-      "sha512": "CGW2Hbogv+ObaTPPtzKaF+DP12PeyjueV1TIixNPezT+2UJZMK//y1pRSc9rzeCWUdU8Toc9QrPS0pa/TjEM8A==",
+      "sha512": "pP+AOzt1o3jESOuLmf52YQTF7H3Ng9hTnrOESQiqsnl2IbBh1HInsAMHYtoh75iUYV0OIkHmjvveraYB6zM97w==",
       "type": "package",
       "path": "system.security.principal.windows/4.4.0",
       "files": [
@@ -3043,28 +3042,28 @@
     ".NETStandard,Version=v2.0": [
       "DapperEx >= 2.0.2",
       "MySql.Data >= 6.10.5",
-      "NETStandard.Library >= 2.0.1"
+      "NETStandard.Library >= 2.0.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Administrator\\.nuget\\packages\\": {},
+    "C:\\Users\\jakey\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "2.0.2",
     "restore": {
-      "projectUniqueName": "E:\\项目\\源码\\MyGithub\\DapperEx-2.0\\src\\DapperEx.MySql\\DapperEx.MySql.csproj",
+      "projectUniqueName": "F:\\项目\\惠农\\源码\\MyGithub\\DapperEx-2.0\\src\\DapperEx.MySql\\DapperEx.MySql.csproj",
       "projectName": "DapperEx.MySql",
-      "projectPath": "E:\\项目\\源码\\MyGithub\\DapperEx-2.0\\src\\DapperEx.MySql\\DapperEx.MySql.csproj",
-      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "E:\\项目\\源码\\MyGithub\\DapperEx-2.0\\src\\DapperEx.MySql\\obj\\",
+      "projectPath": "F:\\项目\\惠农\\源码\\MyGithub\\DapperEx-2.0\\src\\DapperEx.MySql\\DapperEx.MySql.csproj",
+      "packagesPath": "C:\\Users\\jakey\\.nuget\\packages\\",
+      "outputPath": "F:\\项目\\惠农\\源码\\MyGithub\\DapperEx-2.0\\src\\DapperEx.MySql\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jakey\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3073,22 +3072,21 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\Administrator\\.dotnet\\NuGetFallbackFolder": {},
-        "http://10.10.16.4:81/nuget": {},
+        "http://192.168.2.101:82/nuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net452": {
           "projectReferences": {
-            "E:\\项目\\源码\\MyGithub\\DapperEx-2.0\\src\\DapperEx\\DapperEx.csproj": {
-              "projectPath": "E:\\项目\\源码\\MyGithub\\DapperEx-2.0\\src\\DapperEx\\DapperEx.csproj"
+            "F:\\项目\\惠农\\源码\\MyGithub\\DapperEx-2.0\\src\\DapperEx\\DapperEx.csproj": {
+              "projectPath": "F:\\项目\\惠农\\源码\\MyGithub\\DapperEx-2.0\\src\\DapperEx\\DapperEx.csproj"
             }
           }
         },
         "netstandard2.0": {
           "projectReferences": {
-            "E:\\项目\\源码\\MyGithub\\DapperEx-2.0\\src\\DapperEx\\DapperEx.csproj": {
-              "projectPath": "E:\\项目\\源码\\MyGithub\\DapperEx-2.0\\src\\DapperEx\\DapperEx.csproj"
+            "F:\\项目\\惠农\\源码\\MyGithub\\DapperEx-2.0\\src\\DapperEx\\DapperEx.csproj": {
+              "projectPath": "F:\\项目\\惠农\\源码\\MyGithub\\DapperEx-2.0\\src\\DapperEx\\DapperEx.csproj"
             }
           }
         }
@@ -3117,7 +3115,7 @@
           "NETStandard.Library": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[2.0.1, )",
+            "version": "[2.0.3, )",
             "autoReferenced": true
           }
         },

@@ -19,7 +19,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\net452\DapperEx.Sqlite.dll" target="lib\net452\DapperEx.Sqlite.dll" />
-    <file src="E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\netstandard2.0\DapperEx.Sqlite.dll" target="lib\netstandard2.0\DapperEx.Sqlite.dll" />
+    <file src="F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\net452\DapperEx.Sqlite.dll" target="lib\net452\DapperEx.Sqlite.dll" />
+    <file src="F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\netstandard2.0\DapperEx.Sqlite.dll" target="lib\netstandard2.0\DapperEx.Sqlite.dll" />
   </files>
 </package>

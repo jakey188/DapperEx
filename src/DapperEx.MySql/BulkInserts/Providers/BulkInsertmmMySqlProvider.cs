@@ -1,5 +1,4 @@
 ﻿
-
 using DapperEx.BulkInserts.Providers;
 
 namespace DapperEx.MySql.BulkInserts.Providers

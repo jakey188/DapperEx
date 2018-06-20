@@ -7,3 +7,11 @@ E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\netstandard2.0\Dap
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\netstandard2.0\DapperEx.dll
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\netstandard2.0\DapperEx.pdb
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\netstandard2.0\DapperEx.csprojAssemblyReference.cache
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx\bin\Debug\netstandard2.0\DapperEx.deps.json
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx\bin\Debug\netstandard2.0\DapperEx.dll
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx\bin\Debug\netstandard2.0\DapperEx.pdb
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\netstandard2.0\DapperEx.csproj.CoreCompileInputs.cache
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\netstandard2.0\DapperEx.AssemblyInfoInputs.cache
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\netstandard2.0\DapperEx.AssemblyInfo.cs
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\netstandard2.0\DapperEx.dll
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\netstandard2.0\DapperEx.pdb

@@ -6,3 +6,10 @@ E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\net452\DapperEx.As
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\net452\DapperEx.dll
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\net452\DapperEx.pdb
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\net452\DapperEx.csprojAssemblyReference.cache
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx\bin\Debug\net452\DapperEx.dll
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx\bin\Debug\net452\DapperEx.pdb
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\net452\DapperEx.csproj.CoreCompileInputs.cache
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\net452\DapperEx.AssemblyInfoInputs.cache
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\net452\DapperEx.AssemblyInfo.cs
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\net452\DapperEx.dll
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx\obj\Debug\net452\DapperEx.pdb

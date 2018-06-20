@@ -10,3 +10,14 @@ E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\netstandard
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\netstandard2.0\DapperEx.Sqlite.pdb
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\netstandard2.0\DapperEx.Sqlite.csprojAssemblyReference.cache
 E:\项目\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\netstandard2.0\DapperEx.Sqlite.csproj.CopyComplete
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\netstandard2.0\DapperEx.Sqlite.deps.json
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\netstandard2.0\DapperEx.Sqlite.dll
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\netstandard2.0\DapperEx.Sqlite.pdb
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\netstandard2.0\DapperEx.dll
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\bin\Debug\netstandard2.0\DapperEx.pdb
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\netstandard2.0\DapperEx.Sqlite.csproj.CoreCompileInputs.cache
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\netstandard2.0\DapperEx.Sqlite.AssemblyInfoInputs.cache
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\netstandard2.0\DapperEx.Sqlite.AssemblyInfo.cs
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\netstandard2.0\DapperEx.Sqlite.csproj.CopyComplete
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\netstandard2.0\DapperEx.Sqlite.dll
+F:\项目\惠农\源码\MyGithub\DapperEx-2.0\src\DapperEx.Sqlite\obj\Debug\netstandard2.0\DapperEx.Sqlite.pdb
